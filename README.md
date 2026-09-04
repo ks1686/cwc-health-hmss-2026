@@ -1,57 +1,40 @@
-# CWC Health, HMSS 2026 paper
+# CWC Health (HMSS 2026)
 
-LaTeX source for a possible HMSS 2026 (IEEE) submission on CWC Health.
+LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preserving mobile health navigation prototype co-designed with Community Wellness Center members, peer support specialists, and a Rutgers team in behavioral health and engineering.
 
-This is the paper repo, not the app. The Flutter app lives at:
+**Working title:** *CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities*
 
-```text
-../rutgers-health-services-app
-```
+The study build described in the manuscript is a Flutter app with four tabs (Nearby, My Health, Learn, More) and a persistent Help Now control. It emphasizes data minimization: no user accounts, no third-party analytics, and no device GPS tracking for nearby care discovery. This repository is the paper only, not the application source.
 
-Treat the app repo as read-only when checking technical claims. Do not edit it from here unless asked.
-
-## Working title
-
-CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities
+Venue target: [HMSS 2026](https://www.hmss-conference.org/) (IEEE A4 conference manuscript template). The draft is in progress; method and results will be filled from study materials as they are finalized.
 
 ## Build
 
-Needs MacTeX (on this machine: Homebrew cask `mactex-no-gui`). Prefer the `just` recipes:
+Requires a TeX distribution with `latexmk`, `pdflatex`, and BibTeX (for example [TeX Live](https://www.tug.org/texlive/) or MacTeX).
 
 ```bash
-just build   # latexmk -pdf main.tex
-just check   # same compile CI runs on push/PR
-just clean   # latexmk -C
-```
-
-Or without `just`:
-
-```bash
-export PATH="/Library/TeX/texbin:$PATH"
 latexmk -pdf main.tex
 ```
 
-`IEEEtran`, `conference,a4paper`, BibTeX with `references.bib`.
+Or, if [`just`](https://github.com/casey/just) is installed:
 
-## CI
+```bash
+just build    # compile
+just check    # same compile CI runs
+just clean    # remove aux files
+```
 
-GitHub Actions (`.github/workflows/ci.yml`) compiles `main.tex` with `latexmk` on every push to `main` and on every pull request. A failed compile blocks the change. The built PDF is uploaded as a workflow artifact for 14 days.
+Entry point: `main.tex`. Bibliography: `references.bib` (IEEE style).
 
-## Layout
+## Continuous integration
 
-| Path | Role |
+Every push to `main` and every pull request compiles `main.tex` with `latexmk`. The workflow fails if the PDF is not produced. Successful builds upload `main.pdf` as a workflow artifact (14-day retention).
+
+## Repository layout
+
+| Path | Contents |
 | --- | --- |
 | `main.tex` | Manuscript |
 | `references.bib` | Bibliography |
-| `figures/` | Figures for `\includegraphics` |
-| `notes/` | Framing, claims-to-evidence map, related-work and study pointers (not manuscript text) |
-
-## Research materials
-
-Team research (Box sync) is outside this repo. Do not commit it here:
-
-```text
-/Users/ks1686/rclone/School-Box/BHE RFP 2025-2026
-```
-
-`notes/` has pointers into Focus Groups, IRB, Articles, etc.
+| `figures/` | Figures for inclusion |
+| `notes/` | Author working notes (not part of the compiled paper) |

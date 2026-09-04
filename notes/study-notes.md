@@ -2,20 +2,11 @@
 
 **Rule:** Do not invent participant counts, quotations, statistical results, IRB status, or evaluation findings in `main.tex`. Anything not yet sourced stays a TODO here or a comment in the `.tex` file.
 
-## External study materials (Box — not tracked in this repo)
+## Study materials (outside this repository)
 
-Base path:
+Focus-group reports, IRB documents, community advisory board materials, and related team notes are held by the research team outside git. Do not commit transcripts, identifiable participant data, IRB packets, or other sensitive study files to this repository.
 
-`/Users/ks1686/rclone/School-Box/BHE RFP 2025-2026`
-
-Relevant folders (inspect when drafting Method / Results):
-
-- `Focus Groups/` — including `CWC Focus Group Report/`, member/PSS notes, data analysis
-- `Focus Group Excel and Summary Reports/`
-- `IRB Documents/` — Final IRB docs, initial submission, samples
-- `CAB/` — community advisory board materials
-- `Team Notes and Draft Ideas/`
-- `Progress report materials/`
+When drafting Method / Results, use the team’s approved source documents and record claim → source mappings in `claims-and-evidence.md`.
 
 ## Working study questions (from project framing)
 
@@ -27,6 +18,6 @@ Relevant folders (inspect when drafting Method / Results):
 
 ## Before writing Results
 
-1. Identify which Box documents are the source of truth for each finding.
+1. Identify the approved source of truth for each finding.
 2. Record claim → source mapping in `claims-and-evidence.md`.
 3. Only then draft Method / Results prose.

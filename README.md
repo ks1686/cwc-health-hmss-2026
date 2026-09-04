@@ -37,4 +37,4 @@ Every push to `main` and every pull request compiles `main.tex` with `latexmk`. 
 | `main.tex` | Manuscript |
 | `references.bib` | Bibliography |
 | `figures/` | Figures for inclusion |
-| `notes/` | Author working notes (not part of the compiled paper) |
+| `notes/` | Shareable author working notes (framing, claims map, related-work and study TODOs). Not manuscript text. Sensitive study materials stay outside this repo. |

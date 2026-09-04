@@ -36,7 +36,7 @@ jobs:
           ls -lh main.pdf
 
       - name: Upload PDF
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: main-pdf-${{ github.sha }}
           path: main.pdf
@@ -44,7 +44,7 @@ jobs:
 
       - name: Upload build logs on failure
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: latex-logs-${{ github.sha }}
           path: |

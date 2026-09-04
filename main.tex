@@ -1,0 +1,237 @@
+% HMSS 2026 / IEEE conference paper
+% HMSS 2026 uses the A4 IEEE Manuscript Template for Conference Proceedings.
+% Build: PATH="/Library/TeX/texbin:$PATH" latexmk -pdf main.tex
+
+\documentclass[conference,a4paper]{IEEEtran}
+
+% Uncomment only if you need a funding footnote in the first-page author block.
+% \IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities}
+
+\author{
+\IEEEauthorblockN{First Author, Second Author, Third Author}
+\IEEEauthorblockA{
+Department / School / Program\\
+Rutgers University\\
+New Brunswick, NJ, USA\\
+\{netid1, netid2, netid3\}@rutgers.edu
+}
+}
+
+\maketitle
+
+\begin{abstract}
+% TODO: Rewrite as a single paragraph covering:
+% 1) problem/context,
+% 2) what was designed/built,
+% 3) study or evaluation method (only once finalized),
+% 4) main findings (only with study evidence),
+% 5) contribution/implication.
+%
+% Do not assert empirical results, IRB status, or clinical outcomes until sourced.
+% Re-verify technical claims against ../rutgers-health-services-app before submission.
+CWC Health is a co-designed mobile health navigation prototype for community
+and university-adjacent wellness settings. The current study build combines
+location-aware discovery of nearby health resources, curated health education,
+a personal-health workspace surface, and persistent access to urgent support
+while minimizing accounts, analytics, and location tracking.
+% TODO: Add co-design/evaluation method and findings only after evidence exists.
+% TODO: Update storage/encryption wording when My Health persistence ships.
+\end{abstract}
+
+\begin{IEEEkeywords}
+mobile health, personalized health, health navigation, privacy by design,
+co-design, university health, digital health
+\end{IEEEkeywords}
+
+\section{Introduction}
+% Suggested arc:
+% - Problem: fragmented health-resource discovery and sensitive data handling
+% - University-community context
+% - Gap in existing mobile health/navigation systems
+% - CWC Health approach
+% - Research questions / contributions
+%
+% Central question (working): How much useful, contextually personalized health
+% support can a mobile application provide while collecting and retaining as
+% little sensitive user data as possible?
+
+\subsection{Contributions}
+% Candidate contributions --- treat as provisional; re-check app repo before asserting.
+The main contributions of this work are intended to include:
+\begin{itemize}
+    \item A mobile health navigation architecture for context-aware nearby
+    resource discovery that avoids device GPS tracking in the current study
+    build, using town-level geocoding and OpenStreetMap queries instead.
+    \item A privacy-oriented product posture without user accounts or
+    third-party analytics, with a personal-health workspace designed for
+    local-first storage as implementation matures beyond demo data.
+    \item A co-design-oriented interface integrating nearby care discovery,
+    personal health organization, health education, and urgent-support access.
+    \item % TODO: Assert only after study evidence exists.
+    An empirical co-design/usability evaluation focused on discoverability,
+    trust, perceived usefulness, privacy perceptions, and design iteration.
+\end{itemize}
+
+\section{Related Work}
+% Sources: Box Background literature/ + Articles/Articles of Interest.docx (2026-09-03).
+% Do not invent citations; prefer summaries over long quotations.
+
+\subsection{Online Health Information Seeking and Fragmented Access}
+A large literature documents that people routinely seek health information online,
+yet information is scattered across websites, portals, and social platforms and is
+often difficult to evaluate~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS}.
+Recent national survey evidence further shows that social media is a common venue
+for health-related engagement among {US} adults, even as many users distrust the
+accuracy of what they encounter~\cite{Pedroso2026SocialMedia}. Parallel policy
+commentary argues that digital access programs are tightly coupled to digital
+health equity for low-income populations facing structural barriers to
+care~\cite{Fitzpatrick2025DigitalEquity}. Community-oriented ``social
+prescribing'' approaches likewise aim to connect people to non-medical supports,
+but depend on reliable local resource networks~\cite{Lancet2025SocialPrescribing}.
+Taken together, these works motivate mobile \emph{navigation} interfaces that
+centralize discovery of nearby resources and trusted education without assuming
+that users can assemble care pathways unaided.
+
+\subsection{Barriers to Mobile and Digital Health Engagement}
+Qualitative and review evidence identifies recurring barriers to digital health
+use among underserved and culturally diverse populations, including access,
+literacy, language, trust, and usability~\cite{Whitehead2023Barriers}.
+Within integrated youth services, interest-holders report that mHealth can reduce
+barriers to in-person care while introducing privacy, design, and sustainability
+challenges that call for co-designed solutions~\cite{Ding2025mHealth}.
+Digital literacy is increasingly treated as a social determinant of health,
+especially for people with serious mental illness who may otherwise be excluded
+from digital tools~\cite{Dwyer2025TechUse}. These findings inform CWC~Health's
+emphasis on plain information architecture, source-labeled Learn content, and
+minimal account/analytics surface area in the study build.
+
+\subsection{Co-Design and Participatory Digital Health}
+Community-based participatory research and related co-production traditions argue
+that equitable decision-making with community partners improves relevance and
+trust~\cite{Opara2025CBPR,PapastavrouBrooks2023Principles}.
+Lived-experience co-leadership is likewise framed as essential for redesigning
+mental and substance-use care systems that remain fragmented and
+stigma-laden~\cite{Epp2025CoLeadership}. At the same time, critics caution that
+``participatory'' labels can be assimilated into institutional innovation without
+genuine power sharing~\cite{Veldmeijer2025Participatory}.
+Empirical co-design of digital tools for substance-use contexts---including
+adaptation of App4Independence for opioid use disorder and formative work on a
+wellness-enhanced contingency-management smartphone
+concept---illustrates how lived experts and clinicians jointly shape feasibility,
+safety, and feature priorities~\cite{Darcey2024A4iO,Deshais2026WECM}.
+CWC~Health builds on this lineage as a co-designed health-\emph{navigation}
+prototype: it targets discoverability of nearby care, personal-health
+organization surfaces, education, and urgent support under a data-minimization
+posture, rather than clinical decision support or generative AI advice.
+
+\section{System Design}
+% Agents: re-verify claims against ../rutgers-health-services-app before edits.
+% Prefer README.md, AGENTS.md, docs/engineering/, and lib/ over older paper notes.
+% Distinguish as-built study prototype from aspirational MVP in CWC_Health_App/.
+
+\subsection{Design Goals}
+CWC Health is designed as a \emph{health-navigation} application rather than a
+clinical decision-support system: it helps users find care resources, organize
+locally held health information, read source-labeled education content, and
+reach urgent support quickly, without diagnosing conditions or recommending
+treatments. Design goals emphasize (i)~data minimization (no accounts, no
+third-party analytics), (ii)~clear information architecture discoverable in
+co-design sessions, and (iii)~optional live resource discovery that does not
+depend on continuous location tracking. The Flutter study prototype implements
+this shell and a live Nearby path; several personal-health and offline-directory
+behaviors remain design targets documented in the project specification and are
+called out explicitly below.
+
+\subsection{Application Structure}
+The study build is a cross-platform Flutter application with four primary bottom
+tabs---Nearby, My Health, Learn, and More---plus a persistent Help~Now control
+in the application header so urgent actions remain one tap away from any tab.
+Nearby is the default landing surface. Compile-time flags gate network-facing
+behavior: \texttt{LIVE\_NEARBY} (default off) replaces the static Nearby demo
+list with live OpenStreetMap listings, and \texttt{HELP\_NOW\_LIVE} (default
+off) enables device dialer/SMS launches for selected national support numbers.
+In the current study build, My~Health and Learn still present curated sample
+content for co-design feedback; More routes to placeholder settings and support
+pages, including an erase affordance that currently explains that personal
+health records are not yet stored on the device.
+
+\subsection{Privacy and Data Minimization}
+As implemented, the prototype does not create user accounts, store login
+credentials, or include third-party analytics software development kits. Live
+Nearby retains only a last-success listing cache and a town geocode point on
+device---no identity payload and no GPS trail. Help~Now national dialers remain
+off unless an explicit study build enables them, reducing accidental live crisis
+calls during demos. Intended MVP privacy controls from the feature specification
+(optional PIN for My~Health, encrypted on-device personal records, and a working
+one-tap erase of saved personal data) are \emph{not} claimed as shipped in the
+present study build; the paper will update these statements when the application
+repository implements them.
+
+\subsection{Location-Aware Nearby Services}
+When \texttt{LIVE\_NEARBY} is enabled, Nearby geocodes a fixed town name (New
+Brunswick, NJ, in the current v1 engineering demo) through Nominatim and queries
+OpenStreetMap Overpass mirrors for pharmacies, clinics, and urgent care within a
+local radius. An optional Google Places attempt may soft-fail to OpenStreetMap
+when no billed key is provided. The live path does not request device location
+permissions and does not use background location APIs. Results are deduplicated,
+time-stamped, and cached locally; if all network sources fail, the interface
+shows an error with retry and deliberately avoids falling back to invented demo
+listings so users cannot confuse synthetic rows with real places. Directions
+open OpenStreetMap or native geo links rather than embedding a third-party map
+SDK. Flag-off builds keep a static New~Brunswick demo list for meetings and
+automated tests.
+
+\subsection{On-Device Personal Health Information}
+My~Health exposes appointments, medications, providers, and a wallet-card view
+as co-design surfaces. In the current study build these entries are sample
+constants rather than a persisted personal store; the interface states that
+My~Health is not PIN-locked yet. Learn presents a small set of offline article
+topics with explicit source labels (for example, public-health agencies) and
+does not generate AI answers. The longer-term design target is a local-first
+personal-health workspace with optional protection and erasure---again, to be
+described as implemented only after the application code supports it.
+
+\section{Co-Design and Evaluation Method}
+% TODO: Participants, recruitment, procedure, study questions, instruments,
+% analysis method, ethics/IRB status --- only from sourced materials.
+% Do not invent N, quotes, stats, or IRB status.
+% Pointers: notes/study-notes.md; Box Focus Groups/ and IRB Documents/
+
+\section{Results}
+% TODO: Report actual findings only. Candidates once evidence exists:
+% - task completion / navigation discoverability
+% - Help Now discoverability
+% - trust/privacy perceptions
+% - qualitative themes
+% - design changes resulting from feedback
+
+\section{Discussion}
+% Interpret results; relate back to personalized health access and privacy.
+% Distinguish health navigation from clinical decision support.
+% ``Personalized'' = contextualized access (location + local health info),
+% not personalized medical treatment.
+
+\section{Limitations}
+% Candidates: prototype maturity, sample size/context, OSM data quality,
+% no clinical validation, no diagnosis/treatment recommendations.
+
+\section{Conclusion}
+% What was learned and what this contributes to privacy-preserving digital
+% health navigation --- fill after results exist.
+
+% Bibliography (enabled once citations exist in the body).
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

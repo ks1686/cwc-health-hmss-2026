@@ -1,0 +1,36 @@
+# EditorConfig — baseline whitespace rules every editor understands.
+# https://editorconfig.org  •  enforced by `editorconfig-checker` in lefthook.
+#
+# This exists so formatting is consistent for anyone (or any agent) touching the
+# repo, including editors that are not Cursor.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Go is tabs, by language convention — gofmt will fight anything else.
+[*.go]
+indent_style = tab
+
+[Makefile]
+indent_style = tab
+
+[*.{py,pyi}]
+indent_size = 4
+
+[*.{rs,java,kt,kts,swift}]
+indent_size = 4
+
+[*.{md,markdown}]
+# Trailing whitespace is a hard line break in Markdown.
+trim_trailing_whitespace = false
+
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+insert_final_newline = false

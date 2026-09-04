@@ -1,51 +1,51 @@
-# CWC Health — HMSS 2026 paper
+# CWC Health, HMSS 2026 paper
 
-IEEE conference paper repository for a possible **HMSS 2026** submission on CWC Health.
+LaTeX source for a possible HMSS 2026 (IEEE) submission on CWC Health.
 
-This is **not** the application repository. The Flutter app lives separately at:
+This is the paper repo, not the app. The Flutter app lives at:
 
 ```text
 ../rutgers-health-services-app
 ```
 
-Treat that app repo as **read-only** technical truth when verifying system claims. Do not modify it from this project unless explicitly asked.
+Treat the app repo as read-only when checking technical claims. Do not edit it from here unless asked.
 
 ## Working title
 
 CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities
 
-## Build (local)
+## Build
 
-Requires [MacTeX](https://tug.org/mactex/) (this machine: Homebrew cask `mactex-no-gui`). Put TeX binaries on `PATH`:
+Needs MacTeX (on this machine: Homebrew cask `mactex-no-gui`). Put TeX on `PATH`, then:
 
 ```bash
 export PATH="/Library/TeX/texbin:$PATH"
 latexmk -pdf main.tex
 ```
 
-Clean build artifacts:
+Clean up:
 
 ```bash
 latexmk -C
 ```
 
-Uses `IEEEtran` with `\documentclass[conference,a4paper]{IEEEtran}` and BibTeX (`references.bib`, `IEEEtran` style).
+`IEEEtran`, `conference,a4paper`, BibTeX with `references.bib`.
 
 ## Layout
 
 | Path | Role |
 | --- | --- |
-| `main.tex` | Manuscript skeleton |
+| `main.tex` | Manuscript |
 | `references.bib` | Bibliography |
 | `figures/` | Figures for `\includegraphics` |
-| `notes/` | Research framing / claims map (not manuscript prose) |
+| `notes/` | Framing, claims-to-evidence map, related-work and study pointers (not manuscript text) |
 
-## External research corpus
+## Research materials
 
-Team research materials (Box sync) are **outside** this git repo — do not commit them here:
+Team research (Box sync) is outside this repo. Do not commit it here:
 
 ```text
 /Users/ks1686/rclone/School-Box/BHE RFP 2025-2026
 ```
 
-See `notes/` for pointers into Focus Groups, IRB, Articles, etc.
+`notes/` has pointers into Focus Groups, IRB, Articles, etc.

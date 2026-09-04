@@ -40,12 +40,13 @@ New Brunswick, NJ, USA\\
 %
 % Do not assert empirical results, IRB status, or clinical outcomes until sourced.
 % Re-verify technical claims against ../rutgers-health-services-app before submission.
-CWC Health is a co-designed mobile health navigation prototype developed with
-Community Wellness Center stakeholders and an interdisciplinary university team.
-The current study build combines location-aware discovery of nearby health
-resources, curated health education, a personal-health workspace surface, and
-persistent access to urgent support while minimizing accounts, analytics, and
-device location tracking.
+CWC Health is a mobile health navigation prototype co-designed with Community
+Wellness Center members, peer support specialists, and a Rutgers team spanning
+behavioral health and engineering. The current study build has four tabs
+(Nearby, My Health, Learn, More) and a persistent Help Now button. It finds
+nearby pharmacies and clinics from OpenStreetMap, shows source-labeled health
+education, and keeps crisis lines one tap away. It has no user accounts, no
+third-party analytics, and no device location tracking.
 % TODO: Add co-design/evaluation method and findings only after evidence exists.
 % TODO: Update storage/encryption wording when My Health persistence ships.
 \end{abstract}
@@ -58,56 +59,58 @@ co-design, university health, digital health
 \section{Introduction}
 % Framing sources: Box Final Proposal narrative; notes/research-framing.md; Related Work cites.
 % Do not insert focus-group N, quotes, or survey findings here until Method/Results are sourced.
-Accessing trustworthy health information and nearby care has become a digital task:
-appointments, pharmacy locations, educational materials, and crisis contacts are often
-scattered across portals, search results, and social platforms that are uneven in quality
-and hard to evaluate~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS,Pedroso2026SocialMedia}.
-For people living with mental health, substance use, and/or co-occurring physical
-conditions---especially those experiencing poverty or unstable housing---these barriers
-compound with limited digital literacy, fragmented service systems, and understandable
-mistrust of invasive digital platforms~\cite{Whitehead2023Barriers,Ding2025mHealth,Dwyer2025TechUse,Fitzpatrick2025DigitalEquity,Epp2025CoLeadership}.
-Community Wellness Centers (CWCs) and related peer-recovery settings offer low-barrier,
-peer-delivered support, yet members still need practical ways to find local health
-resources and organize personal health information without being forced into
-high-surveillance app models.
+Finding health information and nearby care now happens on a phone. Appointments,
+pharmacy locations, health articles, and crisis numbers live in separate portals,
+search results, and social feeds, and their quality is hard to
+judge~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS,Pedroso2026SocialMedia}.
+For people with mental health, substance use, or co-occurring physical conditions,
+and especially those living in poverty or without stable housing, the problem is
+worse: lower digital literacy, fragmented services, and a reasonable distrust of
+apps that collect a lot of
+data~\cite{Whitehead2023Barriers,Ding2025mHealth,Dwyer2025TechUse,Fitzpatrick2025DigitalEquity,Epp2025CoLeadership}.
+Community Wellness Centers (CWCs) already offer low-barrier, peer-delivered
+support. Their members still need a simple way to find local health resources
+and keep track of their own health information without signing up for an app
+that tracks them.
 
-Existing digital health tools frequently emphasize accounts, continuous tracking, clinical
-decision support, or generative assistants. In contrast, our guiding research question is:
-\emph{How much useful, contextually personalized health support can a mobile application
-provide while collecting and retaining as little sensitive user data as possible?}
-Here ``personalized'' means contextualized access---for example, nearby resource discovery
-and surfaces for locally held health information---not personalized diagnosis or
-treatment recommendation. We pursue that question through equity-centered co-design with
-CWC members, peer support specialists, and a community advisory board, in partnership
-with an interdisciplinary Rutgers team spanning behavioral health and engineering.
-The resulting prototype, CWC~Health, is a Flutter navigation shell with four primary
-tabs (Nearby, My~Health, Learn, and More) plus a persistent Help~Now control. The current
-study build prioritizes discoverable information architecture, source-labeled education,
-gated urgent-support dialers, and a live Nearby path that uses town-level geocoding with
-OpenStreetMap rather than device GPS tracking, while deferring account systems and
-third-party analytics.
+Most digital health tools assume accounts, continuous tracking, clinical decision
+support, or a chatbot. We ask a different question:
+\emph{How much useful, contextually personalized health support can a mobile
+application provide while collecting and retaining as little sensitive user data
+as possible?} ``Personalized'' here means access shaped by the user's context
+(where they are, what health information they keep on the phone). It does not
+mean diagnosis or treatment recommendations. We work on this question through
+equity-centered co-design with CWC members, peer support specialists, a community
+advisory board, and a Rutgers team from behavioral health and electrical and
+computer engineering. The prototype, CWC~Health, is a Flutter app with four tabs
+(Nearby, My~Health, Learn, More) and a persistent Help~Now button. The current
+study build focuses on navigation that is easy to find, source-labeled health
+articles, crisis dialers that stay off unless a build enables them, and a live
+Nearby tab that geocodes a town name and queries OpenStreetMap instead of using
+device GPS. It has no account system and no third-party analytics.
 
-This paper reports the system design of the study prototype and situates it in related
-work on online health information seeking, mHealth adoption barriers, and participatory
-digital health. Sections on co-design methods and empirical findings will be completed
-from sourced study materials; we do not claim clinical efficacy.
+This paper describes the system design of the study prototype and relates it to
+prior work on online health information seeking, mHealth adoption barriers, and
+participatory digital health. The method and results sections will be filled in
+from study materials as they are finalized. We do not claim clinical efficacy.
 
 \subsection{Contributions}
-% Provisional --- re-check ../rutgers-health-services-app before asserting technical items.
-The main contributions of this work are intended to include:
+% Provisional. Re-check ../rutgers-health-services-app before asserting technical items.
+The intended contributions are:
 \begin{itemize}
-    \item A mobile health navigation architecture for context-aware nearby
-    resource discovery that avoids device GPS tracking in the current study
-    build, using town-level geocoding and OpenStreetMap queries instead.
-    \item A privacy-oriented product posture without user accounts or
-    third-party analytics, with a personal-health workspace designed for
-    local-first storage as implementation matures beyond demo data.
-    \item A co-design-oriented interface integrating nearby care discovery,
-    personal health organization, health education, and urgent-support access
-    for community wellness settings.
+    \item A mobile health navigation design that finds nearby care from a
+    town-level geocode and OpenStreetMap queries, with no device GPS tracking
+    in the current study build.
+    \item A prototype with no user accounts and no third-party analytics, whose
+    My~Health tab is designed for local-only storage once it moves past demo
+    data.
+    \item One co-designed interface that puts nearby care, personal health
+    organization, health education, and urgent support in the same four-tab
+    layout for community wellness settings.
     \item % TODO: Assert only after study evidence exists.
-    An empirical co-design/usability evaluation focused on discoverability,
-    trust, perceived usefulness, privacy perceptions, and design iteration.
+    A co-design and usability evaluation covering discoverability, trust,
+    perceived usefulness, privacy perceptions, and the design changes that came
+    out of community feedback.
 \end{itemize}
 
 \section{Related Work}
@@ -115,52 +118,46 @@ The main contributions of this work are intended to include:
 % Do not invent citations; prefer summaries over long quotations.
 
 \subsection{Online Health Information Seeking and Fragmented Access}
-A large literature documents that people routinely seek health information online,
-yet information is scattered across websites, portals, and social platforms and is
-often difficult to evaluate~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS}.
-Recent national survey evidence further shows that social media is a common venue
-for health-related engagement among {US} adults, even as many users distrust the
-accuracy of what they encounter~\cite{Pedroso2026SocialMedia}. Parallel policy
-commentary argues that digital access programs are tightly coupled to digital
-health equity for low-income populations facing structural barriers to
-care~\cite{Fitzpatrick2025DigitalEquity}. Community-oriented ``social
-prescribing'' approaches likewise aim to connect people to non-medical supports,
-but depend on reliable local resource networks~\cite{Lancet2025SocialPrescribing}.
-Taken together, these works motivate mobile \emph{navigation} interfaces that
-centralize discovery of nearby resources and trusted education without assuming
-that users can assemble care pathways unaided.
+People look for health information online, but it is spread across websites,
+portals, and social platforms and is hard to
+evaluate~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS}.
+A US national survey (HINTS 2024) found that most social media users engage with
+health content there, and most of them also believe much of it is false or
+misleading~\cite{Pedroso2026SocialMedia}. Policy commentary ties digital access
+programs directly to digital health equity for low-income
+populations~\cite{Fitzpatrick2025DigitalEquity}. ``Social prescribing,'' where a
+clinician or community worker refers someone to non-medical local supports,
+depends on the same thing: a reliable map of what is nearby~\cite{Lancet2025SocialPrescribing}.
+This is the gap CWC~Health targets: one place to find nearby resources and
+trusted education, without expecting users to assemble a care pathway on their own.
 
 \subsection{Barriers to Mobile and Digital Health Engagement}
-Qualitative and review evidence identifies recurring barriers to digital health
-use among underserved and culturally diverse populations, including access,
-literacy, language, trust, and usability~\cite{Whitehead2023Barriers}.
-Within integrated youth services, interest-holders report that mHealth can reduce
-barriers to in-person care while introducing privacy, design, and sustainability
-challenges that call for co-designed solutions~\cite{Ding2025mHealth}.
-Digital literacy is increasingly treated as a social determinant of health,
-especially for people with serious mental illness who may otherwise be excluded
-from digital tools~\cite{Dwyer2025TechUse}. These findings inform CWC~Health's
-emphasis on plain information architecture, source-labeled Learn content, and
-minimal account/analytics surface area in the study build.
+A qualitative systematic review of 34 studies found the same barriers to digital
+health across culturally and linguistically diverse groups: access, literacy,
+language, trust, and usability~\cite{Whitehead2023Barriers}. In an integrated
+youth-services network, users and staff said mHealth lowered barriers to
+in-person care but raised privacy, design, and sustainability concerns, and they
+asked for co-design~\cite{Ding2025mHealth}. Digital literacy is now treated as a
+social determinant of health, with people with serious mental illness at the
+highest risk of being left out~\cite{Dwyer2025TechUse}. These are the reasons
+CWC~Health uses a flat four-tab layout, labels the source on every Learn article,
+and ships without accounts or analytics.
 
 \subsection{Co-Design and Participatory Digital Health}
-Community-based participatory research and related co-production traditions argue
-that equitable decision-making with community partners improves relevance and
-trust~\cite{Opara2025CBPR,PapastavrouBrooks2023Principles}.
-Lived-experience co-leadership is likewise framed as essential for redesigning
-mental and substance-use care systems that remain fragmented and
-stigma-laden~\cite{Epp2025CoLeadership}. At the same time, critics caution that
-``participatory'' labels can be assimilated into institutional innovation without
-genuine power sharing~\cite{Veldmeijer2025Participatory}.
-Empirical co-design of digital tools for substance-use contexts---including
-adaptation of App4Independence for opioid use disorder and formative work on a
-wellness-enhanced contingency-management smartphone
-concept---illustrates how lived experts and clinicians jointly shape feasibility,
-safety, and feature priorities~\cite{Darcey2024A4iO,Deshais2026WECM}.
-CWC~Health builds on this lineage as a co-designed health-\emph{navigation}
-prototype: it targets discoverability of nearby care, personal-health
-organization surfaces, education, and urgent support under a data-minimization
-posture, rather than clinical decision support or generative AI advice.
+Community-based participatory research and co-production hold that community
+partners should share decision-making, and that this produces more relevant,
+more trusted work~\cite{Opara2025CBPR,PapastavrouBrooks2023Principles}.
+Epp et al.\ make the same argument for lived-experience co-leadership in mental
+and substance-use care~\cite{Epp2025CoLeadership}. Veldmeijer and van Os warn
+that the ``participatory'' label is often absorbed by institutions without any
+real transfer of power~\cite{Veldmeijer2025Participatory}. Two recent app
+projects show what co-design looks like in practice: adapting App4Independence
+for opioid use disorder with 6 lived experts and 8 clinicians, and formative
+interviews and focus groups with a community advisory board for a
+wellness-enhanced contingency-management app~\cite{Darcey2024A4iO,Deshais2026WECM}.
+CWC~Health follows the same approach but for health navigation: nearby care,
+personal health organization, education, and urgent support, with as little
+stored data as possible and no clinical decision support or generative AI.
 
 \section{System Design}
 % Agents: re-verify claims against ../rutgers-health-services-app before edits.
@@ -168,66 +165,63 @@ posture, rather than clinical decision support or generative AI advice.
 % Distinguish as-built study prototype from aspirational MVP in CWC_Health_App/.
 
 \subsection{Design Goals}
-CWC Health is designed as a \emph{health-navigation} application rather than a
-clinical decision-support system: it helps users find care resources, organize
-locally held health information, read source-labeled education content, and
-reach urgent support quickly, without diagnosing conditions or recommending
-treatments. Design goals emphasize (i)~data minimization (no accounts, no
-third-party analytics), (ii)~clear information architecture discoverable in
-co-design sessions, and (iii)~optional live resource discovery that does not
-depend on continuous location tracking. The Flutter study prototype implements
-this shell and a live Nearby path; several personal-health and offline-directory
-behaviors remain design targets documented in the project specification and are
-called out explicitly below.
+CWC Health is a health-navigation app, not a clinical decision-support system.
+It helps a user find care, keep their own health information on their phone,
+read health articles with a named source, and reach urgent help fast. It does
+not diagnose or recommend treatment. Three goals drive the design: (i)~collect
+as little data as possible (no accounts, no third-party analytics), (ii)~a
+layout that CWC members can find their way around in co-design sessions, and
+(iii)~live resource discovery that does not depend on tracking the user's
+location. The Flutter study prototype implements the navigation shell and the
+live Nearby tab. Several My~Health and offline-directory behaviors are still
+design targets in the project specification; each is marked as such below.
 
 \subsection{Application Structure}
-The study build is a cross-platform Flutter application with four primary bottom
-tabs---Nearby, My Health, Learn, and More---plus a persistent Help~Now control
-in the application header so urgent actions remain one tap away from any tab.
-Nearby is the default landing surface. Compile-time flags gate network-facing
-behavior: \texttt{LIVE\_NEARBY} (default off) replaces the static Nearby demo
-list with live OpenStreetMap listings, and \texttt{HELP\_NOW\_LIVE} (default
-off) enables device dialer/SMS launches for selected national support numbers.
-In the current study build, My~Health and Learn still present curated sample
-content for co-design feedback; More routes to placeholder settings and support
-pages, including an erase affordance that currently explains that personal
-health records are not yet stored on the device.
+The study build is a Flutter app with four bottom tabs (Nearby, My~Health,
+Learn, More) and a Help~Now button in the header, so urgent actions are one tap
+away from any screen. Nearby is the default tab. Two compile-time flags gate
+network behavior. \texttt{LIVE\_NEARBY} (default off) swaps the static Nearby
+demo list for live OpenStreetMap results. \texttt{HELP\_NOW\_LIVE} (default off)
+turns the 988, 911, and Poison Control buttons into real \texttt{tel:} and
+\texttt{sms:} launches. In the current build, My~Health and Learn show sample
+content for co-design feedback, and More opens placeholder settings and support
+pages. Its Erase button currently explains that nothing is stored on the phone
+yet.
 
 \subsection{Privacy and Data Minimization}
-As implemented, the prototype does not create user accounts, store login
-credentials, or include third-party analytics software development kits. Live
-Nearby retains only a last-success listing cache and a town geocode point on
-device---no identity payload and no GPS trail. Help~Now national dialers remain
-off unless an explicit study build enables them, reducing accidental live crisis
-calls during demos. Intended MVP privacy controls from the feature specification
-(optional PIN for My~Health, encrypted on-device personal records, and a working
-one-tap erase of saved personal data) are \emph{not} claimed as shipped in the
-present study build; the paper will update these statements when the application
-repository implements them.
+The prototype has no user accounts, stores no login credentials, and includes no
+third-party analytics SDKs (its only runtime dependencies are \texttt{http},
+\texttt{url\_launcher}, and \texttt{shared\_preferences}). Live Nearby keeps
+two things on the device: the last successful listing and the town geocode
+point. There is no identity and no GPS history. Help~Now dialers stay off
+unless a build sets \texttt{HELP\_NOW\_LIVE}, so a demo cannot place a real
+crisis call by accident. The feature specification also calls for an optional
+PIN on My~Health, encrypted on-device records, and a working one-tap erase.
+None of those are in the current study build, and we do not claim them here.
+% TODO: update when the app repo ships PIN / encrypted My Health / real erase.
 
 \subsection{Location-Aware Nearby Services}
-When \texttt{LIVE\_NEARBY} is enabled, Nearby geocodes a fixed town name (New
-Brunswick, NJ, in the current v1 engineering demo) through Nominatim and queries
-OpenStreetMap Overpass mirrors for pharmacies, clinics, and urgent care within a
-local radius. An optional Google Places attempt may soft-fail to OpenStreetMap
-when no billed key is provided. The live path does not request device location
-permissions and does not use background location APIs. Results are deduplicated,
-time-stamped, and cached locally; if all network sources fail, the interface
-shows an error with retry and deliberately avoids falling back to invented demo
-listings so users cannot confuse synthetic rows with real places. Directions
-open OpenStreetMap or native geo links rather than embedding a third-party map
-SDK. Flag-off builds keep a static New~Brunswick demo list for meetings and
-automated tests.
+With \texttt{LIVE\_NEARBY} on, Nearby geocodes a fixed town name (New Brunswick,
+NJ, in the v1 engineering demo) through Nominatim and queries OpenStreetMap
+Overpass for pharmacies, clinics, and urgent care nearby. It tries three
+Overpass mirrors in order, because Overpass rate-limits per IP and a room of
+phones on one Wi-Fi network shares an IP. An optional Google Places lookup
+falls through to OpenStreetMap if no billed key is set. The live path never
+requests location permission and uses no background location APIs. Results are
+deduplicated, time-stamped, and cached. If every source fails, the tab shows an
+error and a retry button. It never falls back to the demo list, because a user
+cannot tell a fake pharmacy from a real one. Directions open OpenStreetMap on
+web or a native \texttt{geo:} link on device, with no embedded map SDK. Builds
+with the flag off keep the static New~Brunswick demo list for meetings and tests.
 
 \subsection{On-Device Personal Health Information}
-My~Health exposes appointments, medications, providers, and a wallet-card view
-as co-design surfaces. In the current study build these entries are sample
-constants rather than a persisted personal store; the interface states that
-My~Health is not PIN-locked yet. Learn presents a small set of offline article
-topics with explicit source labels (for example, public-health agencies) and
-does not generate AI answers. The longer-term design target is a local-first
-personal-health workspace with optional protection and erasure---again, to be
-described as implemented only after the application code supports it.
+My~Health shows appointments, medications, providers, and a wallet card. In the
+current build these are sample constants, not saved user data, and the screen
+says My~Health is not PIN-locked yet. Learn has six topics with short articles
+and a named source on each (for example, public-health agencies). It does not
+generate AI answers. The longer-term target is a local-only personal-health
+store with an optional PIN and a working erase.
+% TODO: describe as implemented only after the app code supports it.
 
 \section{Co-Design and Evaluation Method}
 % TODO: Participants, recruitment, procedure, study questions, instruments,

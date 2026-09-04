@@ -10,9 +10,9 @@ Working notes for authors. Not manuscript text. Keep the paper aligned while dra
 
 ## Working title
 
-CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities
+CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers
 
-The funded project setting is Community Wellness Centers (CWCs) / peer recovery centers, with a Rutgers interdisciplinary team. Keep the working title until the authors change it. Manuscript prose should prefer CWC / peer-recovery framing over implying a general campus-student app.
+The funded project setting is Community Wellness Centers (CWCs) / peer recovery centers, with a Rutgers interdisciplinary team. Title now names Community Wellness Centers. Manuscript prose should prefer CWC / peer-recovery framing over implying a general campus-student app.
 
 ## What this paper is about
 
@@ -36,7 +36,7 @@ Secondary focus: co-design and usability (discoverability, trust, visual languag
 - data minimization
 - on-device health information
 - co-design / participatory design
-- university health / university communities
+- community wellness / Community Wellness Centers
 
 ## Avoid unless explicitly evidenced
 

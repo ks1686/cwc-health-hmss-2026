@@ -32,7 +32,7 @@ Do not modify the companion app from this paper repository unless the authors ex
 ## Project facts (public)
 
 - Build: `just check` or `latexmk -pdf main.tex` (`IEEEtran`, `conference,a4paper`).
-- Working title: CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities.
+- Working title: CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers.
 - Framing: privacy-preserving co-designed mobile health navigation / data minimization. Not precision medicine, clinical AI, diagnosis, or treatment recommendation unless later evidence supports it.
 - Study-build snapshot (2026-09-03): live Nearby is town → Nominatim → OSM behind `LIVE_NEARBY` (no GPS); My Health / Learn / More remain largely static demo; Help Now dialers gated by `HELP_NOW_LIVE`; encrypted My Health / PIN / working erase are spec targets, not yet implemented. Re-check the companion app before relying on this bullet.
 

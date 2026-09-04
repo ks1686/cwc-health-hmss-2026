@@ -16,7 +16,7 @@
 
 \begin{document}
 
-\title{CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities}
+\title{CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers}
 
 \author{
 \IEEEauthorblockN{Karim Smires, Kareem Kholaif, and Sasan Haghani}
@@ -30,22 +30,23 @@ Piscataway, NJ 08854, USA}
 \begin{abstract}
 CWC Health is a privacy-preserving mobile health navigation prototype co-designed
 with Community Wellness Center (CWC) members, peer support specialists, and a
-Rutgers team spanning behavioral health and engineering. Stage~1 needs-assessment
-work used five focus groups (2 virtual peer-support sessions; 3 in-person member
-sessions at New Jersey CWCs) plus Qualtrics pre-surveys (member demographics
-$n{=}41$; peer-support items $n{\approx}9$--10). Participants asked for plain-language
-tools, trusted local resources, peer-supported onboarding, and clear privacy
-limits. The current study build is a Flutter app with four tabs (Nearby,
-My~Health, Learn, More) and a Help~Now control. Live Nearby geocodes a town name
-and queries OpenStreetMap (no device GPS). The app has no user accounts and no
-third-party analytics. This paper reports Stage~1 methods and findings, the
-as-built study prototype, and how community themes shaped design choices. We do
-not claim clinical efficacy or Stage~3 usability results yet.
+Rutgers team in behavioral health and engineering. Stage~1 needs assessment used
+five focus groups (2 virtual peer-support sessions; 3 in-person member sessions
+at New Jersey CWCs; compensated attendance $n{=}7$ peer support specialists and
+$n{=}38$ members) plus Qualtrics pre-surveys (member demographics $n{=}41$;
+peer-support items $n{\approx}9$--10). Participants asked for plain-language tools,
+trusted local resources, peer-supported onboarding, and clear privacy limits.
+The current study build is a Flutter app with four tabs (Nearby, My~Health, Learn,
+More) and a Help~Now control. Live Nearby geocodes a town name and queries
+OpenStreetMap (no device GPS). The app has no user accounts and no third-party
+analytics. This paper reports Stage~1 methods and findings, the as-built study
+prototype, and how community themes shaped design choices. We do not claim
+clinical efficacy or Stage~3 usability results yet.
 \end{abstract}
 
 \begin{IEEEkeywords}
 mobile health, personalized health, health navigation, privacy by design,
-co-design, university health, digital health
+co-design, community wellness, digital health
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -70,8 +71,8 @@ support, or a chatbot. We ask a different question:
 \emph{How much useful, contextually personalized health support can a mobile
 application provide while collecting and retaining as little sensitive user data
 as possible?} ``Personalized'' here means access shaped by the user's context
-(where they are, what health information they keep on the phone). It does not
-mean diagnosis or treatment recommendations. We work on this question through
+(for example a town they name, and health information they keep on the phone).
+It does not mean diagnosis or treatment recommendations. We work on this question through
 equity-centered co-design with CWC members, peer support specialists, a community
 advisory board, and a Rutgers team from behavioral health and electrical and
 computer engineering. The prototype, CWC~Health, is a Flutter app with four tabs
@@ -97,9 +98,9 @@ The contributions of this paper are:
     \item A mobile health navigation design that finds nearby care from a
     town-level geocode and OpenStreetMap queries, with no device GPS tracking
     in the current study build.
-    \item A prototype with no user accounts and no third-party analytics, whose
-    My~Health tab is still demo data in the study build and is targeted for
-    local-only storage later.
+    \item A prototype with no user accounts and no third-party analytics.
+    My~Health remains sample content in the study build; local-only storage is a
+    design target, not a shipped claim.
     \item An explicit mapping from Stage~1 themes to the four-tab study
     interface (Nearby, My~Health, Learn, More) and gated Help~Now dialers.
 \end{itemize}
@@ -130,9 +131,8 @@ youth-services network, users and staff said mHealth lowered barriers to
 in-person care but raised privacy, design, and sustainability concerns, and they
 asked for co-design~\cite{Ding2025mHealth}. Digital literacy is now treated as a
 social determinant of health, with people with serious mental illness at the
-highest risk of being left out~\cite{Dwyer2025TechUse}. These are the reasons
-CWC~Health uses a flat four-tab layout, labels the source on every Learn article,
-and ships without accounts or analytics.
+highest risk of being left out~\cite{Dwyer2025TechUse}. Those barriers motivate CWC~Health's flat four-tab layout, source labels on
+every Learn article, and a build with no accounts or analytics.
 
 \subsection{Co-Design and Participatory Digital Health}
 Community-based participatory research and co-production hold that community
@@ -153,8 +153,8 @@ stored data as possible and no clinical decision support or generative AI.
 \subsection{Privacy-Preserving Mobile Health and Location Practice}
 Privacy by design treats data protection as a default system property, not an
 afterthought~\cite{Cavoukian2010PbDWorkshop}. Reviews of consumer mHealth apps
-still find weak or opaque privacy and data-sharing practices, which is a bad fit
-for populations that already distrust digital platforms~\cite{Alfawzan2022mHealthPrivacy}.
+still find weak or opaque privacy and data-sharing practices, a poor match for
+populations that already distrust digital platforms~\cite{Alfawzan2022mHealthPrivacy}.
 Field studies show how often mobile apps share location beyond what users
 expect~\cite{Almuhimedi2015LocationShared}. Work on inferring location privacy
 preferences without continuous GPS argues that useful place context need not
@@ -177,13 +177,12 @@ stay off unless a build explicitly enables them.
 
 \subsection{Design Goals}
 CWC Health is a health-navigation app, not a clinical decision-support system.
-It helps a user find care, keep their own health information on their phone,
-read health articles with a named source, and reach urgent help fast. It does
-not diagnose or recommend treatment. Three goals drive the design: (i)~collect
-as little data as possible (no accounts, no third-party analytics), (ii)~a
-layout that CWC members can find their way around in co-design sessions, and
-(iii)~live resource discovery that does not depend on tracking the user's
-location. The Flutter study prototype implements the navigation shell and the
+It helps users find care, keep their own health information on the phone,
+read source-labeled health articles, and reach urgent help quickly. It does
+not diagnose or recommend treatment. Three goals drive the design: (i)~collect as little data as possible (no
+accounts, no third-party analytics), (ii)~a layout CWC members can navigate in
+co-design sessions, and (iii)~live resource discovery that does not depend on
+tracking the user's location. The Flutter study prototype implements the navigation shell and the
 live Nearby tab. Several My~Health and offline-directory behaviors are still
 design targets in the project specification; each is marked as such below.
 
@@ -200,7 +199,7 @@ pages. Its Erase button currently explains that nothing is stored on the phone
 yet.
 
 \subsection{Privacy and Data Minimization}
-The prototype follows a data-minimization posture aligned with privacy by
+The prototype follows a data-minimization approach aligned with privacy by
 design~\cite{Cavoukian2010PbDWorkshop,Alfawzan2022mHealthPrivacy}. It has no user
 accounts, stores no login credentials, and includes no third-party analytics SDKs
 (its only runtime dependencies are \texttt{http}, \texttt{url\_launcher}, and
@@ -248,9 +247,8 @@ Jersey (CSPNJ). The aim was to learn how CWC members and peer support specialist
 seek health information, what local resources they use, what makes a health app
 usable or untrustworthy, and what support they want when using such a tool. A
 community advisory board with lived experience helped shape recruitment language
-and interpretation. Later project stages cover app design/alpha work and
-usability testing; this paper reports Stage~1 and the as-built study prototype
-that followed.
+and interpretation. Later project stages cover app design, alpha work, and usability testing.
+This paper reports Stage~1 and the as-built study prototype that followed.
 
 \subsection{Setting and Participants}
 Recruitment targeted adults (18+) who could consent, engage with app-related
@@ -303,8 +301,8 @@ withdraw.
 \subsection{Pre-Survey Highlights}
 Among members with demographic responses ($n{=}41$), 46\% were unemployed and
 12\% were unemployed and receiving SSI/SSDI; 48\% reported some form of unhoused
-status (24\% shelter, 24\% unsheltered). Education was often limited (44\% high
-school or equivalent; 17\% some high school without a diploma). Just over half
+status (24\% shelter, 24\% unsheltered). Highest completed education was often high school or less (44\% high school
+or equivalent; 17\% some high school without a diploma). Just over half
 (54\%) were age 45 or older. Smartphone access was incomplete: 63\% of members
 reported a smartphone ($n{=}41$ base for that item), and most without a phone
 also lacked regular access to someone else's device.
@@ -357,8 +355,8 @@ Stage~1 themes map onto the as-built study build as follows. Centralized local
 resource discovery and action-oriented ``what is nearby / who to call'' needs
 drove the Nearby tab and live OSM listings, with an unvetted-data disclaimer
 because map sources are imperfect~\cite{Mara2025OSMGoogleAmenities}. Distrust of
-data-heavy apps and login friction drove the no-account, no-analytics posture and
-town-level geocode instead of device GPS. Plain-language, source-labeled
+data-heavy apps and login friction drove the no-account, no-analytics approach and town-level geocode instead of
+device GPS. Plain-language, source-labeled
 education drove Learn. Appointment and medication self-management needs drove the
 My~Health information architecture, still populated with sample data until
 local-only persistence ships. Peer-supported onboarding and crisis access drove
@@ -372,18 +370,17 @@ Stage~1 shows a clear gap: many CWC members already use smartphones often, but
 health apps are rare, trust is fragile, and help is expected from peers and
 staff. ``Personalized'' support in this project means contextual access (a town
 search, local listings, on-device health organization), not diagnosis or treatment
-recommendation. Privacy-preserving engineering is not optional marketing language
-here. Participants named scams, surveillance-like collection, and login burden as
+recommendation. Privacy-preserving engineering is a design requirement here, not a slogan.
+Participants named scams, surveillance-like collection, and login burden as
 reasons to avoid apps, which matches broader mHealth privacy
 findings~\cite{Alfawzan2022mHealthPrivacy,Almuhimedi2015LocationShared}.
 
 The study prototype is intentionally narrow. It navigates to care and education.
-It does not replace peer support, clinical portals, or crisis counselors. Putting
-988 one tap away is a navigation affordance sitting next to evidence that crisis
-lines matter as infrastructure~\cite{Gould2025Lifeline988}. Co-design with members
-and peer specialists, plus a community advisory board, is how the team tries to
-avoid ``participatory'' labeling without power
-sharing~\cite{Veldmeijer2025Participatory,Epp2025CoLeadership}.
+It does not replace peer support, clinical portals, or crisis counselors. Putting 988 one tap away is a navigation affordance, not a clinical crisis
+service, and it sits alongside evidence that crisis lines matter as
+infrastructure~\cite{Gould2025Lifeline988}. Co-design with members
+and peer specialists, plus a community advisory board, is how the team tries to avoid ``participatory'' labeling without shared
+decision-making~\cite{Veldmeijer2025Participatory,Epp2025CoLeadership}.
 
 \section{Limitations}
 Results are Stage~1 only. We do not report task-completion rates, Help~Now
@@ -400,7 +397,7 @@ spec targets. We claim no clinical outcomes.
 \section{Conclusion}
 CWC members and peer support specialists asked for simple, trustworthy ways to
 find local care, keep track of personal health tasks, read plain-language
-education, and reach urgent help without handing an app a large data trail.
+education, and reach urgent help without giving an app a large data trail.
 Stage~1 focus groups and pre-surveys document those needs with concrete $n$s and
 themes. The current CWC~Health study build answers with a four-tab Flutter shell,
 town-geocoded OSM Nearby, gated Help~Now dialers, and no accounts or third-party

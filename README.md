@@ -2,7 +2,7 @@
 
 LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preserving mobile health navigation prototype co-designed with Community Wellness Center members, peer support specialists, and a Rutgers team in behavioral health and engineering.
 
-**Working title:** *CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities*
+**Working title:** *CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers*
 
 The study build described in the manuscript is a Flutter app with four tabs (Nearby, My Health, Learn, More) and a persistent Help Now control. It emphasizes data minimization: no user accounts, no third-party analytics, and no device GPS tracking for nearby care discovery. This repository is the paper only, not the application source.
 

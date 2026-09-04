@@ -16,20 +16,26 @@ CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform 
 
 ## Build
 
-Needs MacTeX (on this machine: Homebrew cask `mactex-no-gui`). Put TeX on `PATH`, then:
+Needs MacTeX (on this machine: Homebrew cask `mactex-no-gui`). Prefer the `just` recipes:
+
+```bash
+just build   # latexmk -pdf main.tex
+just check   # same compile CI runs on push/PR
+just clean   # latexmk -C
+```
+
+Or without `just`:
 
 ```bash
 export PATH="/Library/TeX/texbin:$PATH"
 latexmk -pdf main.tex
 ```
 
-Clean up:
-
-```bash
-latexmk -C
-```
-
 `IEEEtran`, `conference,a4paper`, BibTeX with `references.bib`.
+
+## CI
+
+GitHub Actions (`.github/workflows/ci.yml`) compiles `main.tex` with `latexmk` on every push to `main` and on every pull request. A failed compile blocks the change. The built PDF is uploaded as a workflow artifact for 14 days.
 
 ## Layout
 

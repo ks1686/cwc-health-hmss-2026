@@ -1,0 +1,55 @@
+# Compile the IEEE paper on every push and PR.
+# Local equivalent: `just check` (or `just build`).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: latexmk main.tex
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile paper
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          # pdfLaTeX: IEEEtran is not reliable under XeLaTeX/LuaLaTeX.
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Verify PDF
+        run: |
+          test -f main.pdf
+          ls -lh main.pdf
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: main-pdf-${{ github.sha }}
+          path: main.pdf
+          retention-days: 14
+
+      - name: Upload build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs-${{ github.sha }}
+          path: |
+            main.log
+            main.blg
+            main.aux
+          if-no-files-found: ignore
+          retention-days: 7

@@ -12,6 +12,8 @@ This file is **not** manuscript text. Use it to keep the paper aligned while dra
 
 CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities
 
+**Note:** The funded project setting is **Community Wellness Centers (CWCs)** / peer recovery centers (CSPNJ), with a Rutgers interdisciplinary team. Keep the working title until asked to change it; manuscript prose should prefer CWC / peer-recovery framing over implying a general campus-student app.
+
 ## What this paper is about
 
 A privacy-preserving, co-designed mobile **health-navigation** system that provides contextual / personalized access to health resources while minimizing collection and retention of sensitive information.

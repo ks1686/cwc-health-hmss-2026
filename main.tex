@@ -40,11 +40,12 @@ New Brunswick, NJ, USA\\
 %
 % Do not assert empirical results, IRB status, or clinical outcomes until sourced.
 % Re-verify technical claims against ../rutgers-health-services-app before submission.
-CWC Health is a co-designed mobile health navigation prototype for community
-and university-adjacent wellness settings. The current study build combines
-location-aware discovery of nearby health resources, curated health education,
-a personal-health workspace surface, and persistent access to urgent support
-while minimizing accounts, analytics, and location tracking.
+CWC Health is a co-designed mobile health navigation prototype developed with
+Community Wellness Center stakeholders and an interdisciplinary university team.
+The current study build combines location-aware discovery of nearby health
+resources, curated health education, a personal-health workspace surface, and
+persistent access to urgent support while minimizing accounts, analytics, and
+device location tracking.
 % TODO: Add co-design/evaluation method and findings only after evidence exists.
 % TODO: Update storage/encryption wording when My Health persistence ships.
 \end{abstract}
@@ -55,19 +56,44 @@ co-design, university health, digital health
 \end{IEEEkeywords}
 
 \section{Introduction}
-% Suggested arc:
-% - Problem: fragmented health-resource discovery and sensitive data handling
-% - University-community context
-% - Gap in existing mobile health/navigation systems
-% - CWC Health approach
-% - Research questions / contributions
-%
-% Central question (working): How much useful, contextually personalized health
-% support can a mobile application provide while collecting and retaining as
-% little sensitive user data as possible?
+% Framing sources: Box Final Proposal narrative; notes/research-framing.md; Related Work cites.
+% Do not insert focus-group N, quotes, or survey findings here until Method/Results are sourced.
+Accessing trustworthy health information and nearby care has become a digital task:
+appointments, pharmacy locations, educational materials, and crisis contacts are often
+scattered across portals, search results, and social platforms that are uneven in quality
+and hard to evaluate~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS,Pedroso2026SocialMedia}.
+For people living with mental health, substance use, and/or co-occurring physical
+conditions---especially those experiencing poverty or unstable housing---these barriers
+compound with limited digital literacy, fragmented service systems, and understandable
+mistrust of invasive digital platforms~\cite{Whitehead2023Barriers,Ding2025mHealth,Dwyer2025TechUse,Fitzpatrick2025DigitalEquity,Epp2025CoLeadership}.
+Community Wellness Centers (CWCs) and related peer-recovery settings offer low-barrier,
+peer-delivered support, yet members still need practical ways to find local health
+resources and organize personal health information without being forced into
+high-surveillance app models.
+
+Existing digital health tools frequently emphasize accounts, continuous tracking, clinical
+decision support, or generative assistants. In contrast, our guiding research question is:
+\emph{How much useful, contextually personalized health support can a mobile application
+provide while collecting and retaining as little sensitive user data as possible?}
+Here ``personalized'' means contextualized access---for example, nearby resource discovery
+and surfaces for locally held health information---not personalized diagnosis or
+treatment recommendation. We pursue that question through equity-centered co-design with
+CWC members, peer support specialists, and a community advisory board, in partnership
+with an interdisciplinary Rutgers team spanning behavioral health and engineering.
+The resulting prototype, CWC~Health, is a Flutter navigation shell with four primary
+tabs (Nearby, My~Health, Learn, and More) plus a persistent Help~Now control. The current
+study build prioritizes discoverable information architecture, source-labeled education,
+gated urgent-support dialers, and a live Nearby path that uses town-level geocoding with
+OpenStreetMap rather than device GPS tracking, while deferring account systems and
+third-party analytics.
+
+This paper reports the system design of the study prototype and situates it in related
+work on online health information seeking, mHealth adoption barriers, and participatory
+digital health. Sections on co-design methods and empirical findings will be completed
+from sourced study materials; we do not claim clinical efficacy.
 
 \subsection{Contributions}
-% Candidate contributions --- treat as provisional; re-check app repo before asserting.
+% Provisional --- re-check ../rutgers-health-services-app before asserting technical items.
 The main contributions of this work are intended to include:
 \begin{itemize}
     \item A mobile health navigation architecture for context-aware nearby
@@ -77,7 +103,8 @@ The main contributions of this work are intended to include:
     third-party analytics, with a personal-health workspace designed for
     local-first storage as implementation matures beyond demo data.
     \item A co-design-oriented interface integrating nearby care discovery,
-    personal health organization, health education, and urgent-support access.
+    personal health organization, health education, and urgent-support access
+    for community wellness settings.
     \item % TODO: Assert only after study evidence exists.
     An empirical co-design/usability evaluation focused on discoverability,
     trust, perceived usefulness, privacy perceptions, and design iteration.

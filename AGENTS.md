@@ -35,3 +35,17 @@ Do not modify the companion app from this paper repository unless the authors ex
 - Working title: CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for University Communities.
 - Framing: privacy-preserving co-designed mobile health navigation / data minimization. Not precision medicine, clinical AI, diagnosis, or treatment recommendation unless later evidence supports it.
 - Study-build snapshot (2026-09-03): live Nearby is town → Nominatim → OSM behind `LIVE_NEARBY` (no GPS); My Health / Learn / More remain largely static demo; Help Now dialers gated by `HELP_NOW_LIVE`; encrypted My Health / PIN / working erase are spec targets, not yet implemented. Re-check the companion app before relying on this bullet.
+
+## Learned User Preferences
+
+- Collaborative paper repo: keep AGENTS.md skill-agnostic (plain style guidance only; no skill names or skill-enforcement).
+- Public GitHub: notes may be shared, but never commit local rclone/Box absolute paths, gift-card URLs, participant names, Zoom passwords, or other sensitive study materials.
+
+## Learned Workspace Facts
+
+- Public remote: `github.com/ks1686/cwc-health-hmss-2026`.
+- Manuscript Method / Results / Discussion / Limitations / Conclusion target Stage-1 needs assessment only; do not invent Stage-3 usability results.
+- External technical cites beyond the Box corpus are expected (privacy, location minimization, OSM, 988-style engineering literature).
+- Compensated Stage-1 FG aggregates used in manuscript: n=7 PSS virtual, n=38 members in person; IRB Pro2025002116 Exempt 3b approved 2025-11-19.
+- Tip scrub of local machine paths in committed notes was enough; do not force-push a history rewrite for that scrub.
+

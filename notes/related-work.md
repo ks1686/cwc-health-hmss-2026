@@ -37,3 +37,17 @@ Curated PDFs and reading lists for this project live with the research team outs
 ## Venue format
 
 Use the official HMSS / IEEE author guidelines for layout and length. Do not treat unrelated downloaded PDFs as content templates.
+
+
+## External technical cites (beyond Box corpus)
+
+Added 2026-09-04 for System Design / Related Work engineering receipts:
+
+- `Cavoukian2010PbDWorkshop` — privacy by design framing
+- `Alfawzan2022mHealthPrivacy` — mHealth app privacy/policy gaps (JMIR)
+- `Almuhimedi2015LocationShared` — mobile location oversharing field study (CHI)
+- `Maekawa2017LocationPrefs` — location privacy preferences without continuous GPS
+- `Mara2025OSMGoogleAmenities` — OSM vs Google amenity coverage divergence
+- `Gould2025Lifeline988` — 988 / Lifeline crisis-call outcomes context
+
+These were sourced via Crossref/DOI lookup, not the team Box literature folder.

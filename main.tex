@@ -190,12 +190,12 @@ design targets in the project specification; each is marked as such below.
 The study build is a Flutter cross-platform client~\cite{FlutterDocs2026} with
 four bottom tabs (Nearby, My~Health, Learn, More) and a Help~Now button in the
 header, so urgent actions are one tap away from any screen (Fig.~\ref{fig:architecture}
-and Fig.~\ref{fig:ui_shell}). Nearby is the default tab. Two compile-time flags
+and Fig.~\ref{fig:ui_mockups}). Nearby is the default tab. Two compile-time flags
 gate network behavior. \texttt{LIVE\_NEARBY} (default off) swaps the static Nearby
 demo list for live OpenStreetMap results. \texttt{HELP\_NOW\_LIVE} (default off)
 turns the 988, 911, and Poison Control buttons into real \texttt{tel:} and
 \texttt{sms:} launches~\cite{Gould2025Lifeline988}. The co-design mockups in
-Fig.~\ref{fig:ui_shell} show the intended information architecture. In the
+Fig.~\ref{fig:ui_mockups} show the intended information architecture. In the
 current study build, My~Health and Learn still show sample content for co-design
 feedback, and More opens placeholder settings and support pages. Its Erase
 button currently explains that nothing is stored on the phone yet.
@@ -208,18 +208,15 @@ network paths off for meeting builds while preserving the same four-tab shell.}
 \label{fig:architecture}
 \end{figure}
 
-\begin{figure*}[!t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=0.18\textwidth]{figures/ui_screen_nearby.png}\hfill
-\includegraphics[width=0.18\textwidth]{figures/ui_screen_my_health.png}\hfill
-\includegraphics[width=0.18\textwidth]{figures/ui_screen_learn.png}\hfill
-\includegraphics[width=0.18\textwidth]{figures/ui_screen_more.png}\hfill
-\includegraphics[width=0.18\textwidth]{figures/ui_screen_help_now.png}
-\caption{Co-design Final Design v1.1 mockups (Rutgers Scarlet): Nearby,
-My~Health, Learn, More, and Help~Now. Persistent Help~Now appears on every
-tab. Several My~Health and privacy affordances shown here remain design targets
-in the study build.}
-\label{fig:ui_shell}
+\includegraphics[width=0.16\linewidth]{figures/ui_screen_nearby.png}\hfill
+\includegraphics[width=0.16\linewidth]{figures/ui_screen_my_health.png}\hfill
+\includegraphics[width=0.16\linewidth]{figures/ui_screen_learn.png}\hfill
+\includegraphics[width=0.16\linewidth]{figures/ui_screen_more.png}\hfill
+\includegraphics[width=0.16\linewidth]{figures/ui_screen_help_now.png}
+\caption{Co-design Final Design v1.1 mockups (Rutgers Scarlet): Nearby, My Health, Learn, More, and Help Now. Persistent Help Now appears on every tab. Several My Health and privacy affordances shown here remain design targets in the study build.}
+\label{fig:ui_mockups}
 \end{figure*}
 
 \subsection{Privacy and Data Minimization}

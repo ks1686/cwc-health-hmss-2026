@@ -16,6 +16,9 @@ Snapshot date for rows below: **2026-09-03** (re-check before the next System De
 | Live Nearby geocodes a fixed town (New Brunswick) via Nominatim; no GPS path in v1 | As-built | Companion app README; Nearby live design | Supported |
 | On-device Nearby cache: last-success list + town point only (no identity) | As-built | Nearby prefs cache; companion app README | Supported |
 | Live Nearby never falls back to demo listings on failure | As-built | Companion app README; Nearby repository behavior | Supported |
+| Live cards parse OSM opening_hours into Open now / Closed (expand weekdays) | As-built | Companion app hours control; engineering handoff | Supported |
+| Overpass mirror failover for shared-IP rate limits | As-built | Companion app OSM source; engineering handoff | Supported |
+| NJ bounding-box guard on live points | As-built | Companion app Overpass source | Supported |
 | My Health / Learn / More largely static sample / placeholder in study build | As-built | Companion app README; demo data / placeholders | Supported |
 | Help Now: `HELP_NOW_LIVE` gates 988/911/Poison `tel:`/`sms:`; warmline/CWC stay sample | As-built | Companion app README; Help Now feature | Supported |
 | Encrypted on-device My Health storage | Spec / intended | Feature spec; not in study-build code | Do not claim as shipped |

@@ -37,11 +37,11 @@ $n{=}38$ members) plus Qualtrics pre-surveys (member demographics $n{=}41$;
 peer-support items $n{\approx}9$--10). Participants asked for plain-language tools,
 trusted local resources, peer-supported onboarding, and clear privacy limits.
 The current study build is a Flutter app with four tabs (Nearby, My~Health, Learn,
-More) and a Help~Now control. Live Nearby geocodes a town name and queries
-OpenStreetMap (no device GPS). The app has no user accounts and no third-party
-analytics. This paper reports Stage~1 methods and findings, the as-built study
-prototype, and how community themes shaped design choices. We do not claim
-clinical efficacy or Stage~3 usability results yet.
+More) and a Help~Now control~\cite{FlutterDocs2026}. Live Nearby geocodes a town
+name and queries OpenStreetMap (no device GPS). The app has no user accounts and
+no third-party analytics. This paper reports Stage~1 methods and findings, the
+as-built study prototype, and how community themes shaped design choices. We do
+not claim clinical efficacy or Stage~3 usability results yet.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -162,7 +162,7 @@ mean a full tracking
 history~\cite{Maekawa2017LocationPrefs}. Crowdsourced map layers such as
 OpenStreetMap and commercial amenity databases also diverge in coverage, so a
 navigation app that relies on either source must treat listings as imperfect and
-say so~\cite{Mara2025OSMGoogleAmenities}. National crisis lines such as 988 are
+say so~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}. National crisis lines such as 988 are
 evaluated as call outcomes infrastructure; putting those numbers one tap away is
 a navigation choice, not a substitute for clinical crisis
 care~\cite{Gould2025Lifeline988}. CWC~Health takes the engineering side of these
@@ -187,16 +187,36 @@ live Nearby tab. Several My~Health and offline-directory behaviors are still
 design targets in the project specification; each is marked as such below.
 
 \subsection{Application Structure}
-The study build is a Flutter app with four bottom tabs (Nearby, My~Health,
-Learn, More) and a Help~Now button in the header, so urgent actions are one tap
-away from any screen. Nearby is the default tab. Two compile-time flags gate
-network behavior. \texttt{LIVE\_NEARBY} (default off) swaps the static Nearby
+The study build is a Flutter cross-platform client~\cite{FlutterDocs2026} with
+four bottom tabs (Nearby, My~Health, Learn, More) and a Help~Now button in the
+header, so urgent actions are one tap away from any screen (Fig.~\ref{fig:architecture}
+and Fig.~\ref{fig:ui_shell}). Nearby is the default tab. Two compile-time flags
+gate network behavior. \texttt{LIVE\_NEARBY} (default off) swaps the static Nearby
 demo list for live OpenStreetMap results. \texttt{HELP\_NOW\_LIVE} (default off)
 turns the 988, 911, and Poison Control buttons into real \texttt{tel:} and
-\texttt{sms:} launches~\cite{Gould2025Lifeline988}. In the current build, My~Health and Learn show sample
-content for co-design feedback, and More opens placeholder settings and support
-pages. Its Erase button currently explains that nothing is stored on the phone
-yet.
+\texttt{sms:} launches~\cite{Gould2025Lifeline988}. The co-design mockups in
+Fig.~\ref{fig:ui_shell} show the intended information architecture. In the
+current study build, My~Health and Learn still show sample content for co-design
+feedback, and More opens placeholder settings and support pages. Its Erase
+button currently explains that nothing is stored on the phone yet.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/architecture.pdf}
+\caption{As-built study prototype architecture. Compile-time flags keep live
+network paths off for meeting builds while preserving the same four-tab shell.}
+\label{fig:architecture}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/ui_wireframes.png}
+\caption{Co-design Final Design v1.1 mockups (Rutgers Scarlet): Nearby,
+My~Health, Learn, More, and Help~Now. Persistent Help~Now appears on every
+tab. Several My~Health and privacy affordances shown here remain design targets
+in the study build.}
+\label{fig:ui_shell}
+\end{figure}
 
 \subsection{Privacy and Data Minimization}
 The prototype follows a data-minimization approach aligned with privacy by
@@ -214,18 +234,32 @@ None of those are in the current study build, and we do not claim them here.
 
 \subsection{Location-Aware Nearby Services}
 With \texttt{LIVE\_NEARBY} on, Nearby geocodes a fixed town name (New Brunswick,
-NJ, in the v1 engineering demo) through Nominatim and queries OpenStreetMap
-Overpass for pharmacies, clinics, and urgent care
-nearby~\cite{Mara2025OSMGoogleAmenities}. It tries three
-Overpass mirrors in order, because Overpass rate-limits per IP and a room of
-phones on one Wi-Fi network shares an IP. An optional Google Places lookup
-falls through to OpenStreetMap if no billed key is set. The live path never
-requests location permission and uses no background location APIs. Results are
-deduplicated, time-stamped, and cached. If every source fails, the tab shows an
-error and a retry button. It never falls back to the demo list, because a user
-cannot tell a fake pharmacy from a real one. Directions open OpenStreetMap on
-web or a native \texttt{geo:} link on device, with no embedded map SDK. Builds
-with the flag off keep the static New~Brunswick demo list for meetings and tests.
+NJ, in the v1 engineering demo) through Nominatim~\cite{NominatimDocs} and queries
+OpenStreetMap Overpass for pharmacies, clinics, and urgent
+care~\cite{OverpassDocs,Haklay2010OSM,Mara2025OSMGoogleAmenities}. Fig.~\ref{fig:nearby_pipeline}
+summarizes the path. Results are filtered to a New~Jersey bounding-box guard so
+obvious out-of-state points are dropped. The client tries three Overpass mirrors
+in order, because Overpass rate-limits per IP and a room of phones on one Wi-Fi
+network shares an IP. An optional Google Places lookup falls through to
+OpenStreetMap if no billed key is set. The live path never requests location
+permission and uses no background location APIs. Listings are deduplicated,
+time-stamped, and written to an on-device last-success cache. When OSM
+\texttt{opening\_hours} tags parse, cards show Open now / Closed with an
+expandable weekday view; missing or unparseable tags show ``Hours not listed.''
+If every source fails, the tab shows an error and a retry button. It never falls
+back to the demo list, because a user cannot tell a fake pharmacy from a real
+one. Directions open OpenStreetMap on web or a native \texttt{geo:} link on
+device, with no embedded map SDK. Builds with the flag off keep the static
+New~Brunswick demo list for meetings and tests.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/nearby_pipeline.pdf}
+\caption{Live Nearby pipeline. Town-level geocoding replaces device GPS.
+Commercial Places is optional and soft-fails to OSM; mirror failover absorbs
+shared-IP rate limits common in group demos.}
+\label{fig:nearby_pipeline}
+\end{figure}
 
 \subsection{On-Device Personal Health Information}
 My~Health shows appointments, medications, providers, and a wallet card. In the
@@ -314,9 +348,18 @@ these respondents sought health information (89\%), often daily (46\%), mainly
 via internet search (67\%), then providers (38\%) and friends/family (33\%).
 Mean confidence finding health information was $3.26$ / 4. A large majority
 (89\%) said a smartphone health app would be helpful, and 67\% wanted help using
-one. Preferred help formats included video walkthroughs (42\%) and peer support
+one (Fig.~\ref{fig:presurvey}). Preferred help formats included video walkthroughs (42\%) and peer support
 specialists (33\%). Members most often learned about wellness resources by word
 of mouth (59\%) and family/friends (48\%).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/presurvey_highlights.pdf}
+\caption{Selected member pre-survey percentages. Smartphone access uses the
+demographic base ($n{=}41$); remaining bars use smartphone-routed items
+($n{=}27$).}
+\label{fig:presurvey}
+\end{figure}
 
 Peer-support pre-survey items ($n{\approx}9$--10) showed high smartphone comfort
 (mean $4$ / 4 where reported) and similar interest in a helpful health app, with
@@ -351,10 +394,11 @@ institutional support). Structural barriers for members, including phone loss an
 unstable housing, were described explicitly.
 
 \subsection{Design Implications for the Study Prototype}
-Stage~1 themes map onto the as-built study build as follows. Centralized local
+Stage~1 themes map onto the as-built study build as summarized in
+Table~\ref{tab:theme_map} and Fig.~\ref{fig:theme_map}. Centralized local
 resource discovery and action-oriented ``what is nearby / who to call'' needs
 drove the Nearby tab and live OSM listings, with an unvetted-data disclaimer
-because map sources are imperfect~\cite{Mara2025OSMGoogleAmenities}. Distrust of
+because map sources are imperfect~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}. Distrust of
 data-heavy apps and login friction drove the no-account, no-analytics approach and town-level geocode instead of
 device GPS. Plain-language, source-labeled
 education drove Learn. Appointment and medication self-management needs drove the
@@ -365,6 +409,31 @@ cannot place accidental calls~\cite{Gould2025Lifeline988}. Simplicity and one
 job per tab drove the four-tab shell. These are design responses to Stage~1
 evidence, not yet Stage~3 usability measurements of the Flutter build.
 
+\begin{table}[!t]
+\caption{Stage~1 themes and corresponding as-built responses}
+\label{tab:theme_map}
+\centering
+\begin{tabular}{@{}p{0.46\columnwidth}p{0.46\columnwidth}@{}}
+\toprule
+\textbf{Stage~1 theme} & \textbf{Study-build response} \\
+\midrule
+Local resources; next steps to call & Nearby + OSM; Call / Text / Directions \\
+Distrust of data-heavy apps; login friction & No accounts; no analytics; town geocode \\
+Plain language; trusted sources & Learn articles with named sources \\
+Appointments / medications self-management & My~Health IA (sample data for now) \\
+Peer help; urgent access & Help~Now header; \texttt{HELP\_NOW\_LIVE} gate \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/theme_to_features.pdf}
+\caption{Visual map from Stage~1 themes to study-build features. Arrows denote
+design responses, not measured causal effects.}
+\label{fig:theme_map}
+\end{figure}
+
 \section{Discussion}
 Stage~1 shows a clear gap: many CWC members already use smartphones often, but
 health apps are rare, trust is fragile, and help is expected from peers and
@@ -374,6 +443,14 @@ recommendation. Privacy-preserving engineering is a design requirement here, not
 Participants named scams, surveillance-like collection, and login burden as
 reasons to avoid apps, which matches broader mHealth privacy
 findings~\cite{Alfawzan2022mHealthPrivacy,Almuhimedi2015LocationShared}.
+
+From an engineering standpoint, the study build trades continuous sensing for
+explicit, inspectable network paths. Town geocoding plus OSM queries give place
+context without a GPS permission prompt~\cite{Maekawa2017LocationPrefs,NominatimDocs}.
+Mirror failover and an on-device last-success cache are practical responses to
+shared-IP rate limits and intermittent connectivity in community-center demos.
+Compile-time flags (\texttt{LIVE\_NEARBY}, \texttt{HELP\_NOW\_LIVE}) separate
+meeting-safe builds from live field builds without forking the UI.
 
 The study prototype is intentionally narrow. It navigates to care and education.
 It does not replace peer support, clinical portals, or crisis counselors. Putting 988 one tap away is a navigation affordance, not a clinical crisis
@@ -388,11 +465,12 @@ discoverability metrics, or other Stage~3 usability measures for the Flutter
 build. Focus-group and pre-survey samples are tied to participating CSPNJ sites
 and English-speaking inclusion criteria; they are not a statewide probability
 sample. Gift-card clearing aggregates document compensated attendance but are not
-a full demographic census of every person who spoke in a room. OSM and optional
-commercial map sources disagree on amenities~\cite{Mara2025OSMGoogleAmenities},
-and listings are not independently verified by the study team. My~Health is still
-demo content. Encrypted on-device storage, PIN lock, and a working erase remain
-spec targets. We claim no clinical outcomes.
+a full demographic census of every person who spoke in a room. OSM coverage and
+tag quality vary by amenity and region~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities},
+and listings are not independently verified by the study team. Phone numbers are
+often missing on OSM rows, so Call / Text may be hidden while Directions remain.
+My~Health is still demo content. Encrypted on-device storage, PIN lock, and a
+working erase remain spec targets. We claim no clinical outcomes.
 
 \section{Conclusion}
 CWC members and peer support specialists asked for simple, trustworthy ways to
@@ -400,9 +478,10 @@ find local care, keep track of personal health tasks, read plain-language
 education, and reach urgent help without giving an app a large data trail.
 Stage~1 focus groups and pre-surveys document those needs with concrete $n$s and
 themes. The current CWC~Health study build answers with a four-tab Flutter shell,
-town-geocoded OSM Nearby, gated Help~Now dialers, and no accounts or third-party
-analytics. Next work is Stage~3 usability testing of that as-built prototype with
-the same communities, plus finishing local-only My~Health persistence.
+town-geocoded OSM Nearby (mirror failover, hours parse, on-device last-success
+cache), gated Help~Now dialers, and no accounts or third-party analytics. Next
+work is Stage~3 usability testing of that as-built prototype with the same
+communities, plus finishing local-only My~Health persistence.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

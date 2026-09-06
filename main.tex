@@ -28,7 +28,7 @@ Piscataway, NJ 08854, USA}
 \maketitle
 
 \begin{abstract}
-CWC Health is a privacy-preserving mobile health navigation prototype co-designed
+CWC Health is a privacy-preserving mobile health navigation product co-designed
 with Community Wellness Center (CWC) members, peer support specialists, and a
 Rutgers team in behavioral health and engineering. Stage~1 needs assessment used
 five focus groups (2 virtual peer-support sessions; 3 in-person member sessions
@@ -36,12 +36,14 @@ at New Jersey CWCs; compensated attendance $n{=}7$ peer support specialists and
 $n{=}38$ members) plus Qualtrics pre-surveys (member demographics $n{=}41$;
 peer-support items $n{\approx}9$--10). Participants asked for plain-language tools,
 trusted local resources, peer-supported onboarding, and clear privacy limits.
-The current study build is a Flutter app with four tabs (Nearby, My~Health, Learn,
-More) and a Help~Now control. Live Nearby geocodes a town name and queries
-OpenStreetMap (no device GPS). The app has no user accounts and no third-party
-analytics. This paper reports Stage~1 methods and findings, the as-built study
-prototype, and how community themes shaped design choices. We do not claim
-clinical efficacy or Stage~3 usability results yet.
+The planned Flutter product has four tabs (Nearby, My~Health, Learn, More) and a
+Help~Now control~\cite{FlutterDocs2026}. Nearby is town-first, with optional
+one-shot Use my location. My~Health keeps personal data on the device behind a
+PIN, with encrypted storage and erase. The product has no user accounts and no
+third-party analytics. This paper reports Stage~1 methods and findings, the
+Figma product design that answers those themes, and how an engineering demo
+implements the same shell. We do not claim clinical efficacy or Stage~3
+usability results yet.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -75,15 +77,17 @@ as possible?} ``Personalized'' here means access shaped by the user's context
 It does not mean diagnosis or treatment recommendations. We work on this question through
 equity-centered co-design with CWC members, peer support specialists, a community
 advisory board, and a Rutgers team from behavioral health and electrical and
-computer engineering. The prototype, CWC~Health, is a Flutter app with four tabs
-(Nearby, My~Health, Learn, More) and a persistent Help~Now button. The current
-study build focuses on navigation that is easy to find, source-labeled health
-articles, crisis dialers that stay off unless a build enables them, and a live
-Nearby tab that geocodes a town name and queries OpenStreetMap instead of using
-device GPS. It has no account system and no third-party analytics.
+computer engineering. The planned product, CWC~Health, is a Flutter app with four
+tabs (Nearby, My~Health, Learn, More) and a persistent Help~Now button. Product
+design (Figma) answers Stage~1 with town-first Nearby discovery, optional one-shot
+Use my location, source-labeled Learn articles, on-device My~Health with PIN,
+encrypted store, and erase, and no accounts or third-party analytics. Map browsing
+is allowed. Continuous background GPS tracking is not. An engineering demo
+implements the same shell so the team can exercise live OSM paths and privacy
+controls in meetings.
 
-This paper reports Stage~1 co-design methods and findings, the system design of
-the current study prototype, and how community themes map to as-built choices.
+This paper reports Stage~1 co-design methods and findings, the product system
+design that answers those themes, and how community needs map to planned features.
 We relate the work to online health information seeking, mHealth adoption
 barriers, participatory digital health, and technical work on privacy-preserving
 mobile location practice. We do not claim clinical efficacy. App usability
@@ -95,14 +99,14 @@ The contributions of this paper are:
     \item Stage~1 evidence from five CWC focus groups and pre-surveys on health
     information needs, digital hesitancy, privacy concerns, and support
     preferences among members and peer support specialists.
-    \item A mobile health navigation design that finds nearby care from a
-    town-level geocode and OpenStreetMap queries, with no device GPS tracking
-    in the current study build.
-    \item A prototype with no user accounts and no third-party analytics.
-    My~Health remains sample content in the study build; local-only storage is a
-    design target, not a shipped claim.
-    \item An explicit mapping from Stage~1 themes to the four-tab study
-    interface (Nearby, My~Health, Learn, More) and gated Help~Now dialers.
+    \item A mobile health navigation design that finds nearby care town-first
+    via OpenStreetMap, with optional one-shot Use my location and no background
+    GPS tracking or GPS history retention.
+    \item A product with no user accounts and no third-party analytics.
+    My~Health keeps personal data on the device behind a PIN, with encrypted
+    storage and erase (implemented in the engineering demo).
+    \item An explicit mapping from Stage~1 themes to the four-tab product
+    interface (Nearby, My~Health, Learn, More) and Help~Now.
 \end{itemize}
 
 \section{Related Work}
@@ -162,79 +166,116 @@ mean a full tracking
 history~\cite{Maekawa2017LocationPrefs}. Crowdsourced map layers such as
 OpenStreetMap and commercial amenity databases also diverge in coverage, so a
 navigation app that relies on either source must treat listings as imperfect and
-say so~\cite{Mara2025OSMGoogleAmenities}. National crisis lines such as 988 are
+say so~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}. National crisis lines such as 988 are
 evaluated as call outcomes infrastructure; putting those numbers one tap away is
 a navigation choice, not a substitute for clinical crisis
-care~\cite{Gould2025Lifeline988}. CWC~Health takes the engineering side of these
-points: no accounts, no analytics SDKs, town-level geocode instead of device GPS,
-OSM-backed Nearby with an unvetted-listing disclaimer, and Help~Now dialers that
-stay off unless a build explicitly enables them.
+care~\cite{Gould2025Lifeline988}. CWC~Health takes the product side of these
+points: no accounts, no analytics SDKs, town-first discovery with optional
+one-shot location (no background tracking, no GPS history), OSM-backed Nearby
+with an unvetted-listing disclaimer, on-device My~Health controls, and Help~Now
+for urgent numbers.
 
 \section{System Design}
 % Re-verify claims against the companion Flutter app before edits.
-% Prefer that app's README, engineering docs, and source over older paper notes.
-% Distinguish as-built study prototype from aspirational MVP / feature specs.
+% Prefer product / Figma design answering Stage-1; engineering demo is secondary evidence.
+% Companion audit (2026-09): PIN / encrypt / erase shipped; live Nearby can use
+% coarse GPS + embedded maps when LIVE_NEARBY is on; town-first remains the product story.
 
 \subsection{Design Goals}
-CWC Health is a health-navigation app, not a clinical decision-support system.
+CWC Health is a health-navigation product, not a clinical decision-support system.
 It helps users find care, keep their own health information on the phone,
 read source-labeled health articles, and reach urgent help quickly. It does
 not diagnose or recommend treatment. Three goals drive the design: (i)~collect as little data as possible (no
-accounts, no third-party analytics), (ii)~a layout CWC members can navigate in
-co-design sessions, and (iii)~live resource discovery that does not depend on
-tracking the user's location. The Flutter study prototype implements the navigation shell and the
-live Nearby tab. Several My~Health and offline-directory behaviors are still
-design targets in the project specification; each is marked as such below.
+accounts, no third-party analytics), (ii)~a layout CWC members can navigate with
+peer support, and (iii)~resource discovery that does not require continuous
+location tracking. Figma product design answers Stage~1 themes first. A Flutter
+engineering demo implements the same shell so the team can exercise live Nearby
+paths and on-device privacy controls~\cite{FlutterDocs2026}.
 
 \subsection{Application Structure}
-The study build is a Flutter app with four bottom tabs (Nearby, My~Health,
-Learn, More) and a Help~Now button in the header, so urgent actions are one tap
-away from any screen. Nearby is the default tab. Two compile-time flags gate
-network behavior. \texttt{LIVE\_NEARBY} (default off) swaps the static Nearby
-demo list for live OpenStreetMap results. \texttt{HELP\_NOW\_LIVE} (default off)
-turns the 988, 911, and Poison Control buttons into real \texttt{tel:} and
-\texttt{sms:} launches~\cite{Gould2025Lifeline988}. In the current build, My~Health and Learn show sample
-content for co-design feedback, and More opens placeholder settings and support
-pages. Its Erase button currently explains that nothing is stored on the phone
-yet.
+The planned product is a Flutter cross-platform client with four bottom tabs
+(Nearby, My~Health, Learn, More) and a Help~Now button in the header, so urgent
+actions are one tap away from any screen (Fig.~\ref{fig:architecture} and
+Fig.~\ref{fig:ui_mockups}). Nearby is the default tab. Town search is the primary
+way to discover care. Users may optionally tap Use my location for a one-shot
+coarse fix. Help~Now reaches 988, 911, Poison Control, and local entries such as
+a warmline or CWC~\cite{Gould2025Lifeline988}. The co-design mockups in
+Fig.~\ref{fig:ui_mockups} show the product information architecture. My~Health
+is the on-device personal-health workspace. Learn holds source-labeled education.
+More covers settings, peer help, and erase.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/architecture.pdf}
+\caption{Product architecture for the planned CWC~Health service. The four-tab
+shell, town-first Nearby path, Help~Now, and on-device My~Health controls are
+the product surface. The engineering demo implements the same shell.}
+\label{fig:architecture}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{figures/ui_wireframes.png}
+\caption{Co-design Final Design v1.1 board (Rutgers Scarlet): Nearby, My~Health,
+Learn, More, Help~Now, and the accompanying design-rationale panel. Persistent
+Help~Now appears on every tab. The board shows the planned product surface
+grounded in Stage~1.}
+\label{fig:ui_mockups}
+\end{figure*}
 
 \subsection{Privacy and Data Minimization}
-The prototype follows a data-minimization approach aligned with privacy by
+The product follows a data-minimization approach aligned with privacy by
 design~\cite{Cavoukian2010PbDWorkshop,Alfawzan2022mHealthPrivacy}. It has no user
-accounts, stores no login credentials, and includes no third-party analytics SDKs
-(its only runtime dependencies are \texttt{http}, \texttt{url\_launcher}, and
-\texttt{shared\_preferences}). Live Nearby keeps two things on the device: the
-last successful listing and the town geocode point. There is no identity and no
-GPS history~\cite{Almuhimedi2015LocationShared,Maekawa2017LocationPrefs}. Help~Now dialers stay off
-unless a build sets \texttt{HELP\_NOW\_LIVE}, so a demo cannot place a real
-crisis call by accident. The feature specification also calls for an optional
-PIN on My~Health, encrypted on-device records, and a working one-tap erase.
-None of those are in the current study build, and we do not claim them here.
-% TODO: update when the app repo ships PIN / encrypted My Health / real erase.
+accounts, stores no login credentials, and includes no third-party analytics SDKs.
+Nearby may keep a last-success listing cache and a town or one-shot location
+point on the device. There is no identity trail and no GPS history
+retention~\cite{Almuhimedi2015LocationShared,Maekawa2017LocationPrefs}. The
+product does not run background location tracking. Map browsing of Nearby results
+is allowed. Continuous surveillance-style tracking is not. My~Health product
+capabilities include an optional PIN, encrypted on-device records, and one-tap
+erase of personal data. The engineering demo implements those controls so demos
+can show local-first storage without an account cloud.
 
 \subsection{Location-Aware Nearby Services}
-With \texttt{LIVE\_NEARBY} on, Nearby geocodes a fixed town name (New Brunswick,
-NJ, in the v1 engineering demo) through Nominatim and queries OpenStreetMap
-Overpass for pharmacies, clinics, and urgent care
-nearby~\cite{Mara2025OSMGoogleAmenities}. It tries three
-Overpass mirrors in order, because Overpass rate-limits per IP and a room of
-phones on one Wi-Fi network shares an IP. An optional Google Places lookup
-falls through to OpenStreetMap if no billed key is set. The live path never
-requests location permission and uses no background location APIs. Results are
-deduplicated, time-stamped, and cached. If every source fails, the tab shows an
-error and a retry button. It never falls back to the demo list, because a user
-cannot tell a fake pharmacy from a real one. Directions open OpenStreetMap on
-web or a native \texttt{geo:} link on device, with no embedded map SDK. Builds
-with the flag off keep the static New~Brunswick demo list for meetings and tests.
+Nearby is town-first. The user names a town (for example New Brunswick, NJ). The
+client geocodes that name through Nominatim~\cite{NominatimDocs} and queries
+OpenStreetMap Overpass for pharmacies, clinics, and urgent
+care~\cite{OverpassDocs,Haklay2010OSM,Mara2025OSMGoogleAmenities}.
+Fig.~\ref{fig:nearby_pipeline} summarizes the path. An optional Use my location
+control can supply a one-shot coarse fix when the user chooses it. The product
+does not require GPS for the primary town path and does not retain a GPS history.
+Results are filtered to a New~Jersey bounding-box guard so obvious out-of-state
+points are dropped. The client tries Overpass mirrors in order, because Overpass
+rate-limits per IP and a room of phones on one Wi-Fi network shares an IP. An
+optional Google Places lookup is a soft-fail side path. If no billed key is set,
+or Places fails, the OSM path still runs. Listings are deduplicated, time-stamped,
+and written to an on-device last-success cache. When OSM \texttt{opening\_hours}
+tags parse, cards show Open now / Closed with an expandable weekday view; missing
+or unparseable tags show ``Hours not listed.'' If every source fails, the tab
+shows an error and a retry button. It never falls back to a demo pharmacy list,
+because a user cannot tell a fake listing from a real one. Directions and map
+views support browsing places the user already requested. They are not a
+background tracking channel. In the engineering demo, \texttt{LIVE\_NEARBY}
+turns on the live OSM path (and can include coarse location plus embedded maps
+when enabled). Builds with the flag off keep a static demo list for meetings.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/nearby_pipeline.pdf}
+\caption{Nearby pipeline. Town-first geocoding is the primary path. Optional
+one-shot Use my location is available when the user chooses it. Commercial
+Places is an optional soft-fail side path, not a required middle step. Mirror
+failover and an on-device cache absorb shared-IP rate limits and brief outages.}
+\label{fig:nearby_pipeline}
+\end{figure}
 
 \subsection{On-Device Personal Health Information}
-My~Health shows appointments, medications, providers, and a wallet card. In the
-current build these are sample constants, not saved user data, and the screen
-says My~Health is not PIN-locked yet. Learn has six topics with short articles
-and a named source on each (for example, public-health agencies). It does not
-generate AI answers. The longer-term target is a local-only personal-health
-store with an optional PIN and a working erase.
-% TODO: describe as implemented only after the app code supports it.
+My~Health holds appointments, medications, providers, and a wallet card as a
+local-only personal-health store. Product capabilities include an optional PIN
+lock, encrypted on-device storage, and erase of personal data. The engineering
+demo implements those controls so co-design sessions can show local-first
+behavior without accounts. Learn has short articles with a named source on each
+(for example, public-health agencies). It does not generate AI answers.
 
 \section{Co-Design and Evaluation Method}
 % Sourced from team IRB approval, focus-group protocols/schedule, analysis plan,
@@ -248,7 +289,7 @@ seek health information, what local resources they use, what makes a health app
 usable or untrustworthy, and what support they want when using such a tool. A
 community advisory board with lived experience helped shape recruitment language
 and interpretation. Later project stages cover app design, alpha work, and usability testing.
-This paper reports Stage~1 and the as-built study prototype that followed.
+This paper reports Stage~1 and the product design that followed.
 
 \subsection{Setting and Participants}
 Recruitment targeted adults (18+) who could consent, engage with app-related
@@ -314,9 +355,18 @@ these respondents sought health information (89\%), often daily (46\%), mainly
 via internet search (67\%), then providers (38\%) and friends/family (33\%).
 Mean confidence finding health information was $3.26$ / 4. A large majority
 (89\%) said a smartphone health app would be helpful, and 67\% wanted help using
-one. Preferred help formats included video walkthroughs (42\%) and peer support
+one (Fig.~\ref{fig:presurvey}). Preferred help formats included video walkthroughs (42\%) and peer support
 specialists (33\%). Members most often learned about wellness resources by word
 of mouth (59\%) and family/friends (48\%).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/presurvey_highlights.pdf}
+\caption{Selected member pre-survey percentages. Smartphone access uses the
+demographic base ($n{=}41$); remaining bars use smartphone-routed items
+($n{=}27$).}
+\label{fig:presurvey}
+\end{figure}
 
 Peer-support pre-survey items ($n{\approx}9$--10) showed high smartphone comfort
 (mean $4$ / 4 where reported) and similar interest in a helpful health app, with
@@ -350,59 +400,103 @@ prominent from the staff vantage point (staff-assisted navigation and
 institutional support). Structural barriers for members, including phone loss and
 unstable housing, were described explicitly.
 
-\subsection{Design Implications for the Study Prototype}
-Stage~1 themes map onto the as-built study build as follows. Centralized local
+\subsection{Design Implications for the Planned Product}
+Stage~1 themes map onto planned product features as summarized in
+Table~\ref{tab:theme_map} and Fig.~\ref{fig:theme_map}. Centralized local
 resource discovery and action-oriented ``what is nearby / who to call'' needs
-drove the Nearby tab and live OSM listings, with an unvetted-data disclaimer
-because map sources are imperfect~\cite{Mara2025OSMGoogleAmenities}. Distrust of
-data-heavy apps and login friction drove the no-account, no-analytics approach and town-level geocode instead of
-device GPS. Plain-language, source-labeled
-education drove Learn. Appointment and medication self-management needs drove the
-My~Health information architecture, still populated with sample data until
-local-only persistence ships. Peer-supported onboarding and crisis access drove
-the persistent Help~Now entry point, with live 988/911 dialers gated so demos
-cannot place accidental calls~\cite{Gould2025Lifeline988}. Simplicity and one
-job per tab drove the four-tab shell. These are design responses to Stage~1
-evidence, not yet Stage~3 usability measurements of the Flutter build.
+drove the Nearby tab and OSM listings, with an unvetted-data disclaimer
+because map sources are imperfect~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}.
+Distrust of data-heavy apps and login friction drove the no-account, no-analytics
+approach and town-first discovery, with optional one-shot Use my location rather
+than background GPS. Plain-language, source-labeled education drove Learn.
+Appointment and medication self-management needs drove My~Health as an on-device
+store with PIN, encryption, and erase. Peer-supported onboarding and crisis
+access drove the persistent Help~Now entry
+point~\cite{Gould2025Lifeline988}. Simplicity and one job per tab drove the
+four-tab shell. These are product design responses to Stage~1 evidence, not yet
+Stage~3 usability measurements.
+
+\begin{table}[!t]
+\caption{Stage~1 themes and corresponding product responses}
+\label{tab:theme_map}
+\centering
+\begin{tabular}{@{}p{0.46\columnwidth}p{0.46\columnwidth}@{}}
+\toprule
+\textbf{Stage~1 theme} & \textbf{Product response} \\
+\midrule
+Local resources; next steps to call & Nearby + OSM; Call / Text / Directions \\
+Distrust of data-heavy apps; login friction & No accounts; no analytics; town-first \\
+Plain language; trusted sources & Learn articles with named sources \\
+Appointments / medications self-management & My~Health PIN, on-device store, erase \\
+Peer help; urgent access & Help~Now header; urgent + local entries \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/theme_to_features.pdf}
+\caption{Visual map from Stage~1 themes to planned product features. Arrows denote
+design responses, not measured causal effects.}
+\label{fig:theme_map}
+\end{figure}
 
 \section{Discussion}
 Stage~1 shows a clear gap: many CWC members already use smartphones often, but
 health apps are rare, trust is fragile, and help is expected from peers and
 staff. ``Personalized'' support in this project means contextual access (a town
-search, local listings, on-device health organization), not diagnosis or treatment
-recommendation. Privacy-preserving engineering is a design requirement here, not a slogan.
-Participants named scams, surveillance-like collection, and login burden as
-reasons to avoid apps, which matches broader mHealth privacy
+search, optional one-shot location, local listings, on-device health
+organization), not diagnosis or treatment recommendation. Privacy-preserving
+product design is a requirement here, not a slogan. Participants named scams,
+surveillance-like collection, and login burden as reasons to avoid apps, which
+matches broader mHealth privacy
 findings~\cite{Alfawzan2022mHealthPrivacy,Almuhimedi2015LocationShared}.
 
-The study prototype is intentionally narrow. It navigates to care and education.
-It does not replace peer support, clinical portals, or crisis counselors. Putting 988 one tap away is a navigation affordance, not a clinical crisis
-service, and it sits alongside evidence that crisis lines matter as
-infrastructure~\cite{Gould2025Lifeline988}. Co-design with members
-and peer specialists, plus a community advisory board, is how the team tries to avoid ``participatory'' labeling without shared
+The planned product trades continuous sensing for explicit, inspectable paths.
+Town-first geocoding plus OSM queries give place context without requiring
+background GPS~\cite{Maekawa2017LocationPrefs,NominatimDocs}. Optional Use my
+location is a one-shot user action, not a retained tracking history. Mirror
+failover and an on-device last-success cache are practical responses to shared-IP
+rate limits and intermittent connectivity in community centers. Map browsing of
+requested Nearby results is fine. Continuous surveillance-style tracking is not.
+The engineering demo uses compile-time flags so meeting builds can stay offline
+while live builds exercise OSM and location paths without forking the UI.
+
+The product is intentionally narrow. It navigates to care and education. It does
+not replace peer support, clinical portals, or crisis counselors. Putting 988
+one tap away is a navigation affordance, not a clinical crisis service, and it
+sits alongside evidence that crisis lines matter as
+infrastructure~\cite{Gould2025Lifeline988}. Co-design with members and peer
+specialists, plus a community advisory board, is how the team tries to avoid
+``participatory'' labeling without shared
 decision-making~\cite{Veldmeijer2025Participatory,Epp2025CoLeadership}.
 
 \section{Limitations}
 Results are Stage~1 only. We do not report task-completion rates, Help~Now
-discoverability metrics, or other Stage~3 usability measures for the Flutter
-build. Focus-group and pre-survey samples are tied to participating CSPNJ sites
-and English-speaking inclusion criteria; they are not a statewide probability
-sample. Gift-card clearing aggregates document compensated attendance but are not
-a full demographic census of every person who spoke in a room. OSM and optional
-commercial map sources disagree on amenities~\cite{Mara2025OSMGoogleAmenities},
-and listings are not independently verified by the study team. My~Health is still
-demo content. Encrypted on-device storage, PIN lock, and a working erase remain
-spec targets. We claim no clinical outcomes.
+discoverability metrics, or other Stage~3 usability measures. Focus-group and
+pre-survey samples are tied to participating CSPNJ sites and English-speaking
+inclusion criteria; they are not a statewide probability sample. Gift-card
+clearing aggregates document compensated attendance but are not a full
+demographic census of every person who spoke in a room. OSM coverage and tag
+quality vary by amenity and
+region~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}, and listings are not
+independently verified by the study team. Phone numbers are often missing on OSM
+rows, so Call / Text may be hidden while Directions remain. Optional location is
+one-shot and user-initiated; we do not evaluate long-term location-privacy
+threats beyond the product rules stated here (no background tracking, no GPS
+history retention). The engineering demo is a vehicle for exercising the product
+shell, not a full field deployment study. We claim no clinical outcomes.
 
 \section{Conclusion}
 CWC members and peer support specialists asked for simple, trustworthy ways to
 find local care, keep track of personal health tasks, read plain-language
 education, and reach urgent help without giving an app a large data trail.
 Stage~1 focus groups and pre-surveys document those needs with concrete $n$s and
-themes. The current CWC~Health study build answers with a four-tab Flutter shell,
-town-geocoded OSM Nearby, gated Help~Now dialers, and no accounts or third-party
-analytics. Next work is Stage~3 usability testing of that as-built prototype with
-the same communities, plus finishing local-only My~Health persistence.
+themes. The planned CWC~Health product answers with a four-tab Flutter shell,
+town-first OSM Nearby (optional one-shot Use my location, mirror failover, hours
+parse, on-device cache), Help~Now, on-device My~Health with PIN, encrypted store,
+and erase, and no accounts or third-party analytics. Next work is Stage~3
+usability testing of that product surface with the same communities.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

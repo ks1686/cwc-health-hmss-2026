@@ -6,32 +6,30 @@ Map paper claims to supporting evidence before asserting them in `main.tex`.
 
 Do not invent participant counts, quotations, statistical results, IRB status, or clinical outcomes.
 
-Snapshot date for rows below: **2026-09-03** (re-check before the next System Design edit).
+**Framing:** The manuscript describes the researched **future product** / Figma planned service grounded in Stage~1. Engineering demo notes are secondary evidence that the same shell can be exercised. Snapshot date for rows below: **2026-09-05** (companion audit @ `5464776`; re-check before the next System Design edit).
 
 | Claim | Kind | Evidence | Status |
 | --- | --- | --- | --- |
-| Flutter navigation prototype; four tabs + Help Now | As-built | Companion app README; app shell | Supported |
-| No accounts / no stored credentials / no third-party analytics SDKs | As-built | Companion app README; runtime deps limited to http, url_launcher, shared_preferences | Supported |
-| Nearby live listings via OSM Overpass behind `LIVE_NEARBY` (default off) | As-built | Companion app README; Nearby feature + engineering notes | Supported |
-| Live Nearby geocodes a fixed town (New Brunswick) via Nominatim; no GPS path in v1 | As-built | Companion app README; Nearby live design | Supported |
-| On-device Nearby cache: last-success list + town point only (no identity) | As-built | Nearby prefs cache; companion app README | Supported |
-| Live Nearby never falls back to demo listings on failure | As-built | Companion app README; Nearby repository behavior | Supported |
-| My Health / Learn / More largely static sample / placeholder in study build | As-built | Companion app README; demo data / placeholders | Supported |
-| Help Now: `HELP_NOW_LIVE` gates 988/911/Poison `tel:`/`sms:`; warmline/CWC stay sample | As-built | Companion app README; Help Now feature | Supported |
-| Encrypted on-device My Health storage | Spec / intended | Feature spec; not in study-build code | Do not claim as shipped |
-| Optional PIN locking My Health | Spec / intended | Spec + UI “does not lock… yet”; Settings placeholder | Do not claim as shipped |
-| Working one-tap erase of personal PHI | Spec / intended | Erase is still a demo message (“nothing… not saved”) | Do not claim as shipped |
-| Device GPS / coarse one-shot location for Nearby | Prior assumption | Contradicted by as-built Nominatim town path | Do not claim for current study build |
-| Empirical Stage-1 co-design / needs-assessment findings | Study | Pre-survey summary + FG theme tables (drafted into Results 2026-09-04) | Supported (Stage 1 only) |
-| Stage-3 usability evaluation of Flutter build | Study | Not completed / not drafted | TODO |
+| Flutter navigation product shell; four tabs + Help Now | Product / demo | Figma Final Design v1.1; companion app shell | Supported |
+| No accounts / no stored credentials / no third-party analytics SDKs | Product / demo | Companion app README; runtime deps limited to http, url_launcher, shared_preferences (plus privacy libs as shipped) | Supported |
+| Nearby is town-first; OSM Overpass behind `LIVE_NEARBY` | Product / demo | Product story + companion Nearby feature | Supported |
+| Optional one-shot Use my location (coarse); no background tracking; no GPS history retention | Product | Product privacy story; companion can use coarse GPS + embedded maps when `LIVE_NEARBY=true` | Supported as product rule |
+| On-device Nearby cache: last-success list + town/point only (no identity) | Product / demo | Nearby prefs cache; companion app README | Supported |
+| Live Nearby never falls back to demo listings on failure | Product / demo | Companion Nearby repository behavior | Supported |
+| Live cards parse OSM opening_hours; NJ bbox guard; Overpass mirror failover | Product / demo | Companion hours control / Overpass source | Supported |
+| Google Places is optional soft-fail side path (not required middle step) | Product / demo | Companion Nearby design | Supported |
+| My Health: on-device PIN, encrypted store, erase | Product (demo implements) | Companion audit @ `5464776`: PIN / encrypt / erase shipped | Supported as product capability |
+| Help Now: urgent dialers (988/911/Poison) + local entries | Product | Figma + companion Help Now; demo may gate live `tel:`/`sms:` for meeting safety | Supported as product surface |
+| Map browsing of requested Nearby results OK; not continuous surveillance | Product | Privacy narrative in manuscript | Supported as product rule |
+| Empirical Stage-1 co-design / needs-assessment findings | Study | Pre-survey summary + FG theme tables | Supported (Stage 1 only) |
+| Stage-3 usability evaluation of Flutter product | Study | Not completed / not drafted | TODO |
 
 ## Candidate contributions (provisional)
 
-1. Context-aware Nearby discovery that minimizes location retention (as-built: town geocode + OSM; no GPS tracking).
-2. Privacy-oriented product without accounts or analytics; personal-health workspace as a design target progressing from demo data toward local-first storage.
+1. Context-aware Nearby discovery that minimizes location retention (town-first + optional one-shot location; no background GPS history).
+2. Privacy-oriented product without accounts or analytics; on-device My Health with PIN, encrypted store, and erase.
 3. Unified co-designed information architecture: Nearby, My Health, Learn, More, Help Now.
-4. Empirical evaluation — assert only after sourced study evidence.
-
+4. Empirical evaluation: assert only after sourced study evidence.
 
 ## Method / Results claims (2026-09-04)
 
@@ -40,7 +38,7 @@ Snapshot date for rows below: **2026-09-03** (re-check before the next System De
 | IRB Exempt 3b, Pro2025002116, approved 2025-11-19 | Ethics | Rutgers HRPP eIRB notice of approval | Supported |
 | Five Stage-1 focus groups (2 virtual PSS, 3 in-person member) | Method | Focus group schedule; progress accomplishments list | Supported |
 | Compensated FG attendance n=7 PSS (virtual), n=38 members (in person) | Method | Gift-card clearing sheet aggregates ($50); no names in manuscript | Supported |
-| Pre-survey member demographics n=41; smartphone items ~n=27; PSS ~n=9–10 | Results | Group comparison / pre-survey summary (July) | Supported |
+| Pre-survey member demographics n=41; smartphone items ~n=27; PSS ~n=9-10 | Results | Group comparison / pre-survey summary (July) | Supported |
 | Member/PSS qualitative themes (privacy, plain language, resource navigation, digital hesitancy, peer support) | Results | Member and PSS summary tables; July comparison narrative | Supported |
-| Themes → four-tab study build + gated Help Now + town geocode Nearby | Design bridge | Progress accomplishments + companion app README (re-checked 2026-09-04) | Supported as design response |
+| Themes → four-tab planned product + Help Now + town-first Nearby | Design bridge | Figma + Stage-1 themes; companion demo implements shell (re-checked 2026-09-05) | Supported as design response |
 | Stage-3 usability metrics (task completion, Help Now discoverability) | Study | Not in Stage-1 corpus | Do not claim yet |

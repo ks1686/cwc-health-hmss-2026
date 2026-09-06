@@ -50,4 +50,11 @@ Added 2026-09-04 for System Design / Related Work engineering receipts:
 - `Mara2025OSMGoogleAmenities` — OSM vs Google amenity coverage divergence
 - `Gould2025Lifeline988` — 988 / Lifeline crisis-call outcomes context
 
-These were sourced via Crossref/DOI lookup, not the team Box literature folder.
+Added 2026-09-05 (figures + as-built Nearby detail pass):
+
+- `Haklay2010OSM` — classic OSM quality / VGI comparison
+- `FlutterDocs2026` — Flutter platform docs (implementation stack)
+- `NominatimDocs` — town geocode API
+- `OverpassDocs` — OSM Overpass query API
+
+These were sourced via Crossref/DOI lookup or official docs, not the team Box literature folder.

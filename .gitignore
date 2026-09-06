@@ -318,7 +318,8 @@ TSWLatexianTemp*
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -386,8 +387,6 @@ Temporary Items
 # gnuplot
 
 # gnuplottex
-
-# gregoriotex
 
 # htlatex
 
@@ -492,3 +491,6 @@ Temporary Items
 
 # Local latexmk output (source of truth is main.tex)
 /main.pdf
+
+# Local figure-regen venv
+.venv/

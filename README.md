@@ -1,10 +1,10 @@
 # CWC Health (HMSS 2026)
 
-LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preserving mobile health navigation prototype co-designed with Community Wellness Center members, peer support specialists, and a Rutgers team in behavioral health and engineering.
+LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preserving mobile health navigation product co-designed with Community Wellness Center members, peer support specialists, and a Rutgers team in behavioral health and engineering.
 
 **Working title:** *CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers*
 
-The study build described in the manuscript is a Flutter app with four tabs (Nearby, My Health, Learn, More) and a persistent Help Now control. It emphasizes data minimization: no user accounts, no third-party analytics, and no device GPS tracking for nearby care discovery. This repository is the paper only, not the application source.
+The manuscript describes a planned Flutter product (Figma) with four tabs (Nearby, My Health, Learn, More) and a persistent Help Now control, grounded in Stage-1 co-design. It emphasizes data minimization: no user accounts, no third-party analytics, town-first Nearby with optional one-shot location, and on-device My Health with PIN, encrypted store, and erase. An engineering demo implements the same shell. This repository is the paper only, not the application source.
 
 Venue target: [HMSS 2026](https://www.hmss-conference.org/) (IEEE A4 conference manuscript template). The draft is in progress; method and results will be filled from study materials as they are finalized.
 

@@ -60,7 +60,7 @@ def fig_architecture():
 
     # Shell
     rounded(ax, (0.4, 5.4), 13.2, 1.4,
-            "Flutter product shell  \u00b7  no accounts  \u00b7  no analytics SDKs\n"
+            "Flutter product shell  |  no accounts  |  no analytics SDKs\n"
             "On-device first; engineering demo implements the same shell",
             fc=TINT, ec=SCARLET, fs=8.5, weight="bold")
 
@@ -160,7 +160,7 @@ def fig_presurvey():
     labels = [
         "Smartphone\naccess (n=41)",
         "Android\n(of phones)",
-        "Use phone\nmany\u00d7/day",
+        "Use phone\nmanyx/day",
         "Health apps\nrarely/never",
         "Would find\nhealth app helpful",
         "Want help\nusing an app",
@@ -193,7 +193,7 @@ def fig_theme_map():
     ax.set_xlim(0, 12)
     ax.set_ylim(0, 8)
     ax.axis("off")
-    ax.set_title("Stage-1 themes \u2192 planned product features", pad=6)
+    ax.set_title("Stage-1 themes -> planned product features", pad=6)
 
     left = [
         (6.4, "Trusted local resources\n+ action-oriented next steps"),
@@ -229,9 +229,9 @@ def fig_ui_schematic():
     fig, axes = plt.subplots(1, 4, figsize=(7.4, 3.6))
     titles = ["Nearby", "My Health", "Learn", "More"]
     bodies = [
-        ["Disclaimer / town chip", "Category filters", "Place card", "Call \u00b7 Text \u00b7 Directions"],
+        ["Disclaimer / town chip", "Category filters", "Place card", "Call | Text | Directions"],
         ["PIN lock (on-device)", "Appointments", "Medications", "Wallet card"],
-        ["Physical Health", "Mental Health", "Nutrition \u00b7 Exercise", "Source-labeled articles"],
+        ["Physical Health", "Mental Health", "Nutrition | Exercise", "Source-labeled articles"],
         ["How to use", "Ask a Peer", "Settings", "Erase personal data"],
     ]
     for ax, title, rows in zip(axes, titles, bodies):

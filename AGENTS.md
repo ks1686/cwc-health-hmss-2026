@@ -35,7 +35,7 @@ Do not modify the companion app from this paper repository unless the authors ex
 - Build: `just check` or `latexmk -pdf main.tex` (`IEEEtran`, `conference,a4paper`).
 - Working title: CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers.
 - Framing: privacy-preserving co-designed mobile health navigation / data minimization. Not precision medicine, clinical AI, diagnosis, or treatment recommendation unless later evidence supports it.
-- Product snapshot (2026-09-05, companion audit @ `5464776`): town-first Nearby + optional one-shot Use my location; no background tracking / no GPS history retention; PIN / encrypted My Health / erase are product capabilities (shipped in demo); live Nearby can use coarse GPS + embedded maps when `LIVE_NEARBY=true`; no accounts / no analytics. Re-check the companion app before relying on this bullet.
+- Product snapshot (2026-09-06, companion audit @ `5464776`): the final design is town-first Nearby with optional one-shot Use my location and no coordinate retention. The current prototype's live mode instead requests coarse location on load and falls back to a fixed New Brunswick list. PIN / encrypted My Health / erase are implemented in the prototype. There are no accounts or analytics. Re-check the companion app before relying on this bullet.
 
 ## Learned User Preferences
 
@@ -49,4 +49,3 @@ Do not modify the companion app from this paper repository unless the authors ex
 - External technical cites beyond the Box corpus are expected (privacy, location minimization, OSM, 988-style engineering literature).
 - Compensated Stage-1 FG aggregates used in manuscript: n=7 PSS virtual, n=38 members in person; IRB Pro2025002116 Exempt 3b approved 2025-11-19.
 - Tip scrub of local machine paths in committed notes was enough; do not force-push a history rewrite for that scrub.
-

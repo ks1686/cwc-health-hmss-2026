@@ -1,4 +1,5 @@
 """Re-crop five phone frames from the Figma board for IEEE figure* layout."""
+
 from PIL import Image
 from pathlib import Path
 
@@ -14,15 +15,19 @@ im = Image.open(src).convert("RGB")
 w, h = im.size
 print("source", src.name, w, h)
 
-# Phone row only (drop scarlet banner and bottom caption strip).
-top = int(h * 0.235)
-bottom = int(h * 0.88)
+# Phone row only (drop the scarlet banner and bottom caption strip).
+top = int(h * 0.34)
+bottom = int(h * 0.93)
 # Five phones left of the "Why it looks this way" panel.
-left = int(w * 0.015)
-right = int(w * 0.705)
+left = int(w * 0.01)
+right = int(w * 0.81)
 row = im.crop((left, top, right, bottom))
 rw, rh = row.size
 print("row", rw, rh)
+
+# Keep the complete row for the manuscript so phone edges and labels are not
+# clipped by per-column crop estimates.
+row.crop((0, 0, rw, int(rh * 0.92))).save(out / "ui_screens.png", optimize=True)
 
 names = ["nearby", "my_health", "learn", "more", "help_now"]
 cw = rw / 5.0

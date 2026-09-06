@@ -1,12 +1,12 @@
 # CWC Health (HMSS 2026)
 
-LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preserving mobile health navigation product co-designed with Community Wellness Center members, peer support specialists, and a Rutgers team in behavioral health and engineering.
+LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preserving mobile health navigation system co-designed with Community Wellness Center members, peer support specialists, and a Rutgers team in behavioral health and engineering.
 
 **Working title:** *CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers*
 
-The manuscript describes a planned Flutter product (Figma) with four tabs (Nearby, My Health, Learn, More) and a persistent Help Now control, grounded in Stage-1 co-design. It emphasizes data minimization: no user accounts, no third-party analytics, town-first Nearby with optional one-shot location, and on-device My Health with PIN, encrypted store, and erase. An engineering demo implements the same shell. This repository is the paper only, not the application source.
+The manuscript reports completed Stage-1 needs-assessment findings and the intended final Flutter design they informed. The target has four tabs (Nearby, My Health, Learn, More), a persistent Help Now control, no user accounts or third-party analytics, town-first Nearby with optional non-retained one-shot location, and on-device My Health with an optional PIN, encrypted storage, and erase. The current engineering prototype implements part of this target and remains distinct from the final design and future Stage-3 evaluation. This repository is the paper only, not the application source.
 
-Venue target: [HMSS 2026](https://www.hmss-conference.org/) (IEEE A4 conference manuscript template). The draft is in progress; method and results will be filled from study materials as they are finalized.
+Venue target: [HMSS 2026](https://www.hmss-conference.org/) late-track full paper (IEEE A4 conference manuscript template, up to 8 pages including references and appendices).
 
 ## Build
 

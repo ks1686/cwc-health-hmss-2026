@@ -2,12 +2,12 @@
 
 **Rule:** Do not invent participant counts, quotations, statistical results, IRB status, or evaluation findings in `main.tex`. Anything not yet sourced stays a TODO here or a comment in the `.tex` file.
 
-## Status (2026-09-04)
+## Status (2026-09-06)
 
 | Stage | Status in manuscript |
 | --- | --- |
 | Stage 1 needs assessment (focus groups + pre-surveys) | Drafted in Method / Results |
-| Stage 2 app design / study prototype | Described in System Design (as-built) |
+| Stage 2 final app design / engineering prototype | Target design and incomplete prototype are separated in System Design |
 | Stage 3 usability testing of Flutter build | Future work; do not invent metrics |
 
 ## Study materials (outside this repository)
@@ -17,7 +17,7 @@ Focus-group reports, IRB documents, community advisory board materials, and rela
 ## Sourced Stage-1 facts used in `main.tex`
 
 - IRB: Pro2025002116, Exempt 3b, approved 2025-11-19
-- Five groups: 2 virtual PSS (Feb 2026), 3 in-person member (Mar 2026; Glassboro, Jersey City, Neptune)
+- Eight groups: 2 virtual PSS (Feb 2026), 6 in-person member groups across 3 site days (Mar 2026; Glassboro, Jersey City, Plainfield)
 - Compensated attendance aggregates: n=7 PSS virtual, n=38 members in person ($50 gift cards)
 - Pre-survey: members demographics n=41; smartphone items ~n=27; PSS ~n=9–10 (item-level n varies)
 - Analysis: iterative qualitative content analysis, dual coding + adjudicator

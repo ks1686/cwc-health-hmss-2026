@@ -16,7 +16,7 @@ The funded project setting is Community Wellness Centers (CWCs) / peer recovery 
 
 ## What this paper is about
 
-A privacy-preserving, co-designed mobile health-navigation system that provides contextual access to health resources while minimizing collection and retention of sensitive information.
+A privacy-preserving, co-designed mobile health-navigation **product** (Figma planned service) that provides contextual access to health resources while minimizing collection and retention of sensitive information. Stage~1 grounds the product. An engineering demo implements the same shell; demo details are secondary to the product story.
 
 Central question:
 
@@ -46,14 +46,14 @@ Secondary focus: co-design and usability (discoverability, trust, visual languag
 - predictive healthcare
 - improved patient outcomes / clinical efficacy
 
-“Personalized” here means contextualized access based on user context (for example a town-level search) and locally held health information. It does not mean personalized medical treatment.
+“Personalized” here means contextualized access based on user context (for example a town-first search, optional one-shot Use my location) and locally held health information (PIN, on-device store, erase). It does not mean personalized medical treatment. No background GPS tracking. No GPS history retention.
 
 ## Related repositories
 
 | Role | Notes |
 | --- | --- |
 | This paper | LaTeX sources in this repository |
-| Companion Flutter app | Separate repository. Technical claims in the manuscript must match that app’s current study build, not older drafts or specs alone |
+| Companion Flutter app | Separate repository. Use it to verify that the engineering demo can implement the product shell. Lead manuscript claims with the product / Figma design answering Stage~1, not demo-only hedges |
 | Study and literature corpus | Held by the research team outside this git tree. Do not commit IRB files, focus-group transcripts, or other sensitive study materials here |
 
 When editing System Design or other technical claims, re-check the companion app and update `notes/claims-and-evidence.md`.

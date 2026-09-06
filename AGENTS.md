@@ -9,9 +9,10 @@ The companion Flutter app changes often. Do not trust prior chat summaries, olde
 Before asserting or revising any technical claim in `main.tex` (System Design, privacy, Nearby, My Health, Help Now, storage, location, flags):
 
 1. Re-inspect the companion app as it exists now (README, engineering docs, and relevant source).
-2. Distinguish as-built study prototype behavior from aspirational MVP / feature specs.
-3. Update `notes/claims-and-evidence.md` with the new evidence and date when claims change.
-4. Soften or remove manuscript text that no longer matches the code.
+2. Lead with the researched future product / Figma planned service grounded in Stage-1. Treat engineering demo notes as secondary.
+3. Distinguish product capabilities from meeting-only demo flags when both exist.
+4. Update `notes/claims-and-evidence.md` with the new evidence and date when claims change.
+5. Soften or remove manuscript text that no longer matches the product story or companion evidence.
 
 Do not modify the companion app from this paper repository unless the authors explicitly ask.
 
@@ -27,14 +28,14 @@ Do not modify the companion app from this paper repository unless the authors ex
 - Do not invent participant counts, study results, IRB status, quotes, or clinical outcomes. Unsupported claims stay TODOs or notes.
 - Prefer outline / TODO section bodies over fabricated manuscript prose until evidence exists.
 - Do not commit study corpus materials (IRB packets, focus-group transcripts, identifiable notes) or the companion app into this git tree. Keep pointers and claim maps in `notes/` only.
-- Prefer as-built language for the current study build. Label intended MVP features as design targets until implemented.
+- Prefer product-led language for the planned service answering Stage-1. Use engineering demo detail to support, not to undercut, product capabilities that the companion app already implements (for example PIN / encrypt / erase).
 
 ## Project facts (public)
 
 - Build: `just check` or `latexmk -pdf main.tex` (`IEEEtran`, `conference,a4paper`).
 - Working title: CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers.
 - Framing: privacy-preserving co-designed mobile health navigation / data minimization. Not precision medicine, clinical AI, diagnosis, or treatment recommendation unless later evidence supports it.
-- Study-build snapshot (2026-09-03): live Nearby is town → Nominatim → OSM behind `LIVE_NEARBY` (no GPS); My Health / Learn / More remain largely static demo; Help Now dialers gated by `HELP_NOW_LIVE`; encrypted My Health / PIN / working erase are spec targets, not yet implemented. Re-check the companion app before relying on this bullet.
+- Product snapshot (2026-09-05, companion audit @ `5464776`): town-first Nearby + optional one-shot Use my location; no background tracking / no GPS history retention; PIN / encrypted My Health / erase are product capabilities (shipped in demo); live Nearby can use coarse GPS + embedded maps when `LIVE_NEARBY=true`; no accounts / no analytics. Re-check the companion app before relying on this bullet.
 
 ## Learned User Preferences
 

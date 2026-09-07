@@ -8,23 +8,23 @@ Curated PDFs and reading lists for this project live with the research team outs
 
 ## Cited in `main.tex` (2026-09-03 draft)
 
-### Online seeking / fragmented access
+### Online seeking / access
 
 - `Jia2021OHIS`, `DiazHernandez2024HealthInfo`, `Zhao2022OlderOHIS`
 - `Pedroso2026SocialMedia` — JAMA HINTS social-media health engagement
 - `Fitzpatrick2025DigitalEquity` — Health Affairs Forefront digital access/equity
-- `Lancet2025SocialPrescribing` — community resource navigation analogy
+- `Lancet2025SocialPrescribing` — social-prescribing definition and local-support framing, not evidence for the CWC Health map design
 
 ### Barriers / literacy
 
-- `Whitehead2023Barriers` — culturally and linguistically diverse digital-health barriers review
-- `Ding2025mHealth` — mHealth adoption barriers in integrated youth services
-- `Dwyer2025TechUse` — actionable digital literacy assessment
+- `Whitehead2023Barriers` — 34-study review with seven analytical themes; do not present a selected subset as exhaustive
+- `Ding2025mHealth` — participants described mHealth's potential to address in-person barriers; not outcome evidence that it reduced them
+- `Dwyer2025TechUse` — digital literacy as a social determinant and actionable assessment for people with serious mental illness
 
 ### Co-design / participatory
 
 - `Opara2025CBPR`, `PapastavrouBrooks2023Principles`, `Veldmeijer2025Participatory`, `Epp2025CoLeadership`
-- `Darcey2024A4iO`, `Deshais2026WECM` — formative app co-design examples
+- `Darcey2024A4iO`, `Deshais2026WECM` — formative app co-design examples; D'Arcey reports 6 lived experts and 8 clinical experts
 
 ## Intentionally not cited (yet)
 
@@ -44,17 +44,17 @@ Use the official HMSS / IEEE author guidelines for layout and length. Do not tre
 Added 2026-09-04 for System Design / Related Work engineering receipts:
 
 - `Cavoukian2010PbDWorkshop` — privacy by design framing
-- `Alfawzan2022mHealthPrivacy` — mHealth app privacy/policy gaps (JMIR)
+- `Alfawzan2022mHealthPrivacy` — privacy and security policy gaps in women's mHealth apps (JMIR); do not generalize to all mHealth apps
 - `Almuhimedi2015LocationShared` — mobile location oversharing field study (CHI)
-- `Maekawa2017LocationPrefs` — location privacy preferences without continuous GPS
+- `Maekawa2017LocationPrefs` — inferring location-privacy preferences without GPS data, not evidence for town-first resource discovery
 - `Mara2025OSMGoogleAmenities` — OSM vs Google amenity coverage divergence
-- `Gould2025Lifeline988` — 988 / Lifeline crisis-call outcomes context
+- `Gould2025Lifeline988` — Lifeline / 988 caller outcomes only, not evidence for CWC Health feature contents
 
 Added 2026-09-05 (figures + as-built Nearby detail pass):
 
 - `Haklay2010OSM` — classic OSM quality / VGI comparison
-- `FlutterDocs2026` — Flutter platform docs (implementation stack)
+- `FlutterDocs2026` — Flutter framework only, not evidence for CWC Health features or prototype status
 - `NominatimDocs` — town geocode API
-- `OverpassDocs` — OSM Overpass query API
+- `OverpassDocs` — Roland Olbricht's maintainer-hosted Overpass API manual
 
 These were sourced via Crossref/DOI lookup or official docs, not the team Box literature folder.

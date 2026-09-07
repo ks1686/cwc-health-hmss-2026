@@ -6,7 +6,7 @@ Map paper claims to supporting evidence before asserting them in `main.tex`.
 
 Do not invent participant counts, quotations, statistical results, IRB status, or clinical outcomes.
 
-**Framing:** The manuscript describes the intended final Flutter product grounded in Stage~1. The current engineering prototype is secondary feasibility evidence and is explicitly identified as incomplete. Snapshot date for rows below: **2026-09-06** (companion remote `main` audit @ `5464776`; re-check before the next System Design edit).
+**Framing:** The manuscript describes the intended final Flutter product grounded in Stage~1. The current engineering prototype is secondary feasibility evidence and is explicitly identified as incomplete. Snapshot date for rows below: **2026-09-07** (companion `origin/main` audit @ `5464776`; the local checkout was on a separate dependency-update branch; re-check remote `main` before the next System Design edit).
 
 | Claim | Kind | Evidence | Status |
 | --- | --- | --- | --- |
@@ -14,8 +14,8 @@ Do not invent participant counts, quotations, statistical results, IRB status, o
 | No accounts / no stored credentials / no third-party analytics SDKs | Product / demo | Companion app README; runtime deps limited to http, url_launcher, shared_preferences (plus privacy libs as shipped) | Supported |
 | Final Nearby design is town-first; OSM Overpass supplies live listings | Product target | Feature specification and product story | Supported as target behavior |
 | Optional one-shot Use my location (coarse); no background tracking; coordinates remain in memory and are not retained | Product / demo | Product privacy requirements; companion live-location README and source | Supported |
-| On-device Nearby cache: last-success listings and selected town only; no one-shot origin or identity | Product / demo | Product privacy requirements; companion repository behavior | Supported |
-| Current prototype live mode requests one-shot coarse location on load and falls back to a fixed New Brunswick list | Demo divergence | Companion README at `5464776` | Supported; do not describe as final entry flow |
+| On-device Nearby cache: last-success town listings and geocoded town point only; no one-shot device origin or identity | Product / demo | Product privacy requirements; companion repository behavior at `5464776` | Supported |
+| Current prototype live mode requests one-shot coarse location on load and falls back to the New Brunswick town path | Demo divergence | Companion README and Nearby source at `5464776` | Supported; do not describe as final entry flow |
 | Live Nearby never falls back to demo listings on failure | Product / demo | Companion Nearby repository behavior | Supported |
 | Live cards parse OSM opening_hours; NJ bbox guard; Overpass mirror failover | Product / demo | Companion hours control / Overpass source | Supported |
 | Google Places is optional soft-fail side path (not required middle step) | Product / demo | Companion Nearby design | Supported |

@@ -36,12 +36,12 @@ across 3 New Jersey CWC sites; compensated attendance $n{=}7$ peer support
 specialists and $n{=}38$ members) plus Qualtrics pre-surveys (member demographics $n{=}41$;
 peer-support items $n{\approx}9$--10). Participants asked for plain-language tools,
 trusted local resources, peer-supported onboarding, and clear privacy limits.
-The client is implemented in Flutter, Google's cross-platform UI
-framework~\cite{FlutterDocs2026}. The target design has four tabs (Nearby,
-My~Health, Learn, More) and a Help~Now control. Nearby is town-first, with
-optional one-shot Use my location whose coordinates are not retained. My~Health
-keeps personal data on the device behind an optional PIN, with encrypted storage
-and erase. The design has no user accounts or third-party analytics. This paper
+The target is being developed with Flutter, Google's cross-platform UI
+framework~\cite{FlutterDocs2026}. Its design has four tabs (Nearby, My~Health,
+Learn, More) and a Help~Now control. Nearby is town-first, with optional
+one-shot Use my location whose coordinates are not retained. My~Health keeps
+personal data on the device behind an optional PIN, with encrypted storage and
+erase. The design has no user accounts or third-party analytics. This paper
 reports Stage~1 methods and findings, maps those findings to the proposed Flutter
 design, and describes the current prototype. Clinical efficacy and Stage~3
 usability evaluation are outside the scope of this study.
@@ -55,15 +55,16 @@ co-design, community wellness, digital health
 \section{Introduction}
 % Framing: notes/research-framing.md; Related Work cites; team proposal narrative (outside git).
 % Do not insert focus-group N, quotes, or survey findings here until Method/Results are sourced.
-Finding health information and nearby care now happens on a phone. Appointments,
-pharmacy locations, health articles, and crisis numbers live in separate portals,
-search results, and social feeds, and their quality is hard to
-judge~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS,Pedroso2026SocialMedia}.
-Digital health engagement can be harder for people facing mental health or
-substance-use conditions, unstable housing, or socioeconomic disadvantage.
-Reported barriers include limited access and literacy, fragmented services,
-usability problems, and privacy
-concerns~\cite{Whitehead2023Barriers,Ding2025mHealth,Dwyer2025TechUse,Fitzpatrick2025DigitalEquity,Epp2025CoLeadership}.
+People seek health information through search engines, health websites, and
+social media, but judging credibility remains
+difficult~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS,Pedroso2026SocialMedia}.
+Reviews identify technology, language, trust, and usability barriers across
+culturally and linguistically diverse groups~\cite{Whitehead2023Barriers}.
+Studies in youth services and serious mental illness also identify privacy,
+design, sustainability, and digital-literacy
+needs~\cite{Ding2025mHealth,Dwyer2025TechUse}. Policy commentary links digital
+access programs to digital health equity for low-income
+populations~\cite{Fitzpatrick2025DigitalEquity}.
 Community Wellness Centers (CWCs) already offer low-barrier, peer-delivered
 support. Their members still need a simple way to find local health resources
 and keep track of their own health information without signing up for an app
@@ -78,7 +79,8 @@ as possible?} ``Personalized'' here means access shaped by the user's context
 It does not mean diagnosis or treatment recommendations. We work on this question through
 equity-centered co-design with CWC members, peer support specialists, a community
 advisory board, and a Rutgers team from behavioral health and electrical and
-computer engineering. The intended final CWC~Health product is a Flutter app with
+computer engineering. The intended final CWC~Health product is being developed
+as a Flutter app with
 four tabs (Nearby, My~Health, Learn, More) and a persistent Help~Now button. Its
 design answers Stage~1 with town-first Nearby discovery, optional one-shot Use my
 location, source-labeled Learn articles, on-device My~Health with an optional PIN,
@@ -114,37 +116,36 @@ The contributions of this paper are:
 % Sources: team literature corpus + references.bib (drafted 2026-09-03).
 % Do not invent citations; prefer summaries over long quotations.
 
-\subsection{Online Health Information Seeking and Fragmented Access}
-People look for health information online, but it is spread across websites,
-portals, and social platforms and is hard to
-evaluate~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS}.
+\subsection{Online Health Information Seeking and Access}
+People use several online sources for health information, and evaluating the
+information remains
+difficult~\cite{Jia2021OHIS,DiazHernandez2024HealthInfo,Zhao2022OlderOHIS}.
 A US national survey (HINTS 2024) found that most social media users engage with
 health content there, and most of them also believe much of it is false or
 misleading~\cite{Pedroso2026SocialMedia}. Policy commentary ties digital access
 programs directly to digital health equity for low-income
-populations~\cite{Fitzpatrick2025DigitalEquity}. ``Social prescribing,'' where a
-clinician or community worker refers someone to non-medical local supports,
-depends on the same thing: a reliable map of what is nearby~\cite{Lancet2025SocialPrescribing}.
-That fragmentation is the practical gap for a navigation tool: nearby resources
-and trusted education in one place, without expecting users to assemble a care
-pathway on their own.
+populations~\cite{Fitzpatrick2025DigitalEquity}. ``Social prescribing'' connects
+people with non-medical community support~\cite{Lancet2025SocialPrescribing}.
+CWC~Health applies that local-support orientation through Nearby resource
+discovery. It targets one place to find nearby resources and
+trusted education, without expecting users to assemble a care pathway on their own.
 
 \subsection{Barriers to Mobile and Digital Health Engagement}
-A qualitative systematic review of 34 studies found the same barriers to digital
-health across culturally and linguistically diverse groups: access, literacy,
-language, trust, and usability~\cite{Whitehead2023Barriers}. In an integrated
-youth-services network, users and staff said mHealth lowered barriers to
-in-person care but raised privacy, design, and sustainability concerns, and they
-asked for co-design~\cite{Ding2025mHealth}. Digital literacy is increasingly
-recognized as a social determinant of health and is especially relevant for
-people using behavioral health services~\cite{Dwyer2025TechUse}. Together these
-findings favor simple interfaces, labeled sources, and designs that avoid login
-and tracking burden.
+A qualitative systematic review of 34 studies identified seven themes across
+culturally and linguistically diverse groups, including technology use, design,
+language, trustworthiness, and interaction with
+others~\cite{Whitehead2023Barriers}. In an integrated youth-services network,
+users and staff described mHealth's potential to address barriers to in-person
+care, while also raising privacy, design, and sustainability concerns and asking
+for co-design~\cite{Ding2025mHealth}. Digital literacy is now treated as a
+social determinant of health, with people with serious mental illness at high
+risk of digital exclusion~\cite{Dwyer2025TechUse}. These findings favor simple
+interfaces, labeled sources, and designs that avoid login and tracking burden.
 
 \subsection{Co-Design and Participatory Digital Health}
-Community-based participatory research and co-production hold that community
-partners should share decision-making, and that this produces more relevant,
-more trusted work~\cite{Opara2025CBPR,PapastavrouBrooks2023Principles}.
+Community-based participatory research centers shared decision-making with
+community partners~\cite{Opara2025CBPR}. Co-production principles also emphasize
+context-specific design~\cite{PapastavrouBrooks2023Principles}.
 Epp et al.\ make the same argument for lived-experience co-leadership in mental
 and substance-use care~\cite{Epp2025CoLeadership}. Veldmeijer and van Os warn
 that the ``participatory'' label is often absorbed by institutions without any
@@ -158,22 +159,23 @@ clinical decision support or generative AI.
 
 \subsection{Privacy-Preserving Mobile Health and Location Practice}
 Privacy by design treats data protection as a default system property, not an
-afterthought~\cite{Cavoukian2010PbDWorkshop}. Reviews of consumer mHealth apps
-still find weak or opaque privacy and data-sharing practices, a poor match for
-populations that already distrust digital platforms~\cite{Alfawzan2022mHealthPrivacy}.
-Field studies show how often mobile apps share location beyond what users
-expect~\cite{Almuhimedi2015LocationShared}. Work on inferring location privacy
-preferences without continuous GPS argues that useful place context need not
-mean a full tracking
-history~\cite{Maekawa2017LocationPrefs}. Crowdsourced map layers such as
+afterthought~\cite{Cavoukian2010PbDWorkshop}. A review of women's mHealth apps
+found gaps in privacy, data-sharing, and data-security
+policies~\cite{Alfawzan2022mHealthPrivacy}. A field study documented users'
+reactions after being shown how often apps accessed their
+location~\cite{Almuhimedi2015LocationShared}. Prior work shows that users'
+location-privacy preferences can be inferred without GPS data, illustrating an
+alternative to continuous location sensing~\cite{Maekawa2017LocationPrefs}.
+Crowdsourced map layers such as
 OpenStreetMap and commercial amenity databases also diverge in coverage, so a
 navigation app that relies on either source must treat listings as imperfect and
-say so~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}. National crisis lines such as 988 are
-evaluated as call outcomes infrastructure; putting those numbers one tap away is
-a navigation choice, not a substitute for clinical crisis
-care~\cite{Gould2025Lifeline988}. These findings support designs that minimize
-retained identity and location history, treat map listings as imperfect, and
-treat crisis-line shortcuts as navigation rather than clinical care.
+say so~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}. Gould et al. evaluate
+caller outcomes after calls to the National Suicide Prevention Lifeline, now
+988~\cite{Gould2025Lifeline988}. Putting urgent numbers one tap away is a CWC
+Health navigation choice, not a substitute for clinical crisis care. These
+findings support designs that minimize retained identity and location history,
+treat map listings as imperfect, and treat crisis-line shortcuts as navigation
+rather than clinical care.
 
 \section{System Design}
 % Re-verify claims against the companion Flutter app before edits.
@@ -199,7 +201,7 @@ actions are one tap away from any screen (Fig.~\ref{fig:ui_mockups}). Nearby is
 the default tab. Town search is the primary
 way to discover care. Users may optionally tap Use my location for a one-shot
 coarse fix that is not retained. Help~Now reaches 988, 911, Poison Control, and local entries such as
-a warmline or CWC~\cite{Gould2025Lifeline988}. The co-design mockups in
+a warmline or CWC. The co-design mockups in
 Fig.~\ref{fig:ui_mockups} show the product information architecture. My~Health
 is the on-device personal-health workspace. Learn holds source-labeled education.
 More covers settings, peer help, and erase.
@@ -215,12 +217,11 @@ they are not screenshots of the current prototype.}
 
 \subsection{Privacy and Data Minimization}
 The final design follows a data-minimization approach aligned with privacy by
-design~\cite{Cavoukian2010PbDWorkshop,Alfawzan2022mHealthPrivacy}. It has no user
+design~\cite{Cavoukian2010PbDWorkshop}. It has no user
 accounts, stores no login credentials, and includes no third-party analytics SDKs.
 Nearby may keep a last-success listing cache and the selected town on the device.
 One-shot coordinates remain in memory for the requested search and are not
-written to storage. There is no identity trail or location history
-retention~\cite{Almuhimedi2015LocationShared,Maekawa2017LocationPrefs}. The
+written to storage. There is no identity trail or location history retention. The
 design excludes background location tracking. Map browsing of requested Nearby
 results is allowed. My~Health requirements include an optional PIN, encrypted
 on-device records, and one-tap erase of personal data. The current prototype
@@ -232,7 +233,9 @@ In the final design, Nearby is town-first. The user names a town (for example
 New Brunswick, NJ). The
 client geocodes that name through Nominatim~\cite{NominatimDocs} and queries
 OpenStreetMap Overpass for pharmacies, clinics, and urgent
-care~\cite{OverpassDocs,Haklay2010OSM,Mara2025OSMGoogleAmenities}.
+care~\cite{OverpassDocs}. OSM and commercial amenity sources differ in coverage,
+so listings are treated as
+incomplete~\cite{Haklay2010OSM,Mara2025OSMGoogleAmenities}.
 Fig.~\ref{fig:nearby_pipeline} summarizes the path. An optional Use my location
 control can supply a one-shot coarse fix when the user chooses it. The final
 design does not require location permission for the primary town path and does
@@ -411,8 +414,7 @@ than background GPS. Plain-language, source-labeled education drove Learn.
 Appointment and medication self-management needs drove the final My~Health
 design: an on-device store with an optional PIN, encryption, and erase.
 Peer-supported onboarding and crisis
-access drove the persistent Help~Now entry
-point~\cite{Gould2025Lifeline988}. Simplicity and one job per tab drove the
+access drove the persistent Help~Now entry point. Simplicity and one job per tab drove the
 four-tab shell. These are product design responses to Stage~1 evidence, not yet
 Stage~3 usability measurements.
 
@@ -440,13 +442,14 @@ staff. ``Personalized'' support in this project means contextual access (a town
 search, optional one-shot location, local listings, on-device health
 organization), not diagnosis or treatment recommendation. Data minimization is a
 design requirement here, not an add-on. Participants named scams,
-surveillance-like collection, and login burden as reasons to avoid apps, which
-matches broader mHealth privacy
-findings~\cite{Alfawzan2022mHealthPrivacy,Almuhimedi2015LocationShared}.
+surveillance-like collection, and login burden as reasons to avoid apps. These
+concerns align with documented privacy-policy gaps in women's mHealth apps and
+users' reactions to unexpected location
+access~\cite{Alfawzan2022mHealthPrivacy,Almuhimedi2015LocationShared}.
 
 The final design trades continuous sensing for explicit, inspectable paths.
-Town-first geocoding plus OSM queries give place context without requiring
-background GPS~\cite{NominatimDocs}. Optional Use my
+Town-first geocoding uses Nominatim~\cite{NominatimDocs}, then OSM queries provide
+place context without requiring background GPS. Optional Use my
 location is a one-shot user action, not a retained tracking history. Mirror
 failover and an on-device last-success cache are practical responses to shared-IP
 rate limits and intermittent connectivity in community centers. Map browsing of
@@ -456,10 +459,10 @@ builds can run OSM and location paths without forking the UI. Its location-first
 live entry flow remains to be aligned with the town-first final design.
 
 The product is intentionally narrow. It navigates to care and education. It does
-not replace peer support, clinical portals, or crisis counselors. Putting 988
-one tap away is a navigation affordance, not a clinical crisis service, and it
-sits alongside evidence that crisis lines matter as
-infrastructure~\cite{Gould2025Lifeline988}. Co-design with members and peer
+not replace peer support, clinical portals, or crisis counselors. Gould et al.
+evaluate caller outcomes after Lifeline calls~\cite{Gould2025Lifeline988}; CWC
+Health's one-tap 988 entry is a navigation affordance, not a clinical crisis
+service. Co-design with members and peer
 specialists, plus a community advisory board, is how the team tries to avoid
 ``participatory'' labeling without shared
 decision-making~\cite{Veldmeijer2025Participatory,Epp2025CoLeadership}.

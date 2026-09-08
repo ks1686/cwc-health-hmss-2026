@@ -4,7 +4,7 @@ LaTeX source for an IEEE conference paper on **CWC Health**, a privacy-preservin
 
 **Working title:** *CWC Health: Co-Designing a Privacy-Preserving Mobile Health Navigation Platform for Community Wellness Centers*
 
-The manuscript reports completed Stage-1 needs-assessment findings and the intended final Flutter design they informed. The target has four tabs (Nearby, My Health, Learn, More), a persistent Help Now control, no user accounts or third-party analytics, town-first Nearby with optional non-retained one-shot location, and on-device My Health with an optional PIN, encrypted storage, and erase. The current engineering prototype implements part of this target and remains distinct from the final design and future Stage-3 evaluation. This repository is the paper only, not the application source.
+The manuscript reports completed needs-assessment findings and the Flutter product design they informed. The design has four tabs (Nearby, My Health, Learn, More), a persistent Help Now control, no user accounts or third-party analytics, town-first Nearby with optional non-retained one-shot location, and on-device My Health with an optional PIN, encrypted storage, and erase. Usability testing is future work. This repository is the paper only, not the application source.
 
 Venue target: [HMSS 2026](https://www.hmss-conference.org/) late-track full paper (IEEE A4 conference manuscript template, up to 8 pages including references and appendices).
 

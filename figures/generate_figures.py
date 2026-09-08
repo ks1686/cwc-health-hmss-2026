@@ -34,7 +34,7 @@ CARD = "#FFFFFF"
 
 
 def rounded(
-    ax, xy, w, h, text, fc=CARD, ec=LINE, tc=INK, fs=8, lw=1.2, weight="normal"
+    ax, xy, w, h, text, fc=CARD, ec=LINE, tc=INK, fs=8.0, lw=1.2, weight="normal"
 ):
     box = FancyBboxPatch(
         xy,
@@ -152,18 +152,18 @@ def fig_architecture():
 
 
 def fig_nearby_pipeline():
-    fig, ax = plt.subplots(figsize=(7.2, 3.2))
+    fig, ax = plt.subplots(figsize=(7.2, 3.5))
     ax.set_xlim(0, 16)
-    ax.set_ylim(0, 5.6)
+    ax.set_ylim(0, 6.2)
     ax.axis("off")
-    ax.set_title("Nearby data path (town-first; optional location)", pad=6)
+    ax.set_title("Nearby resource lookup", pad=6)
 
     # Main town-first path (Google is a side path, not a required middle box)
     steps = [
         (0.3, "Town name\n(primary)", SURFACE, LINE),
         (3.3, "Nominatim\ngeocode", CARD, LINE),
         (6.3, "OSM Overpass\n(+ mirror failover)", CARD, SCARLET),
-        (9.5, "NJ bbox + hours\nparse + cache", SURFACE, LINE),
+        (9.5, "Normalize + hours\n+ timestamp", SURFACE, LINE),
         (12.7, "UI + disclaimer\nCall / Text / Dir.", SCARLET, SCARLET),
     ]
     for x, label, fc, ec in steps:
@@ -187,18 +187,18 @@ def fig_nearby_pipeline():
         x2 = steps[i + 1][0]
         arrow(ax, (x1, 2.95), (x2, 2.95), color=SUB)
 
-    # Optional Google soft-fail as a side path (not in the required chain)
+    # Optional provider is a parallel source, not a required middle step.
     rounded(
         ax,
         (6.0, 0.55),
         3.2,
         1.15,
-        "Google Places\n(optional soft-fail)",
+        "Google Places\n(optional source)",
         fc=TINT,
         ec=SCARLET,
         fs=6.5,
     )
-    # Side arrow from Nominatim area down to Google, then up toward OSM
+    # Side arrow from the origin toward Google, then to normalized results.
     ax.annotate(
         "",
         xy=(7.6, 1.7),
@@ -210,7 +210,7 @@ def fig_nearby_pipeline():
     )
     ax.annotate(
         "",
-        xy=(8.0, 2.0),
+        xy=(10.8, 2.0),
         xytext=(8.4, 1.7),
         arrowprops=dict(
             arrowstyle="-|>", color=SUB, lw=1.0, connectionstyle="arc3,rad=-0.2"
@@ -218,24 +218,28 @@ def fig_nearby_pipeline():
         zorder=1,
     )
 
-    ax.text(
-        8.0,
-        5.15,
-        "Optional: one-shot Use my location (coarse). No background tracking; coordinates not retained.",
-        ha="center",
-        va="center",
-        color=SUB,
-        fontsize=7.0,
+    rounded(
+        ax,
+        (5.9, 4.45),
+        3.4,
+        1.0,
+        "Optional one-shot\ncoarse location",
+        fc=TINT,
+        ec=SCARLET,
+        fs=6.5,
     )
-    ax.text(
-        8.0,
-        0.15,
-        "Failure: plain error + retry. Never swaps in demo pharmacy names.",
-        ha="center",
-        va="center",
-        color=SUB,
-        fontsize=7.5,
+    arrow(ax, (7.6, 4.45), (7.6, 3.9), color=SUB)
+    rounded(
+        ax,
+        (12.0, 4.45),
+        3.5,
+        1.0,
+        "All live sources fail:\ntown cache or Try again",
+        fc=SURFACE,
+        ec=LINE,
+        fs=6.5,
     )
+    arrow(ax, (10.8, 3.9), (13.0, 4.45), color=SUB)
 
     fig.savefig(OUT / "nearby_pipeline.pdf")
     fig.savefig(OUT / "nearby_pipeline.png")

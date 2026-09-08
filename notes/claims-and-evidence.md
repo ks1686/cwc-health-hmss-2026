@@ -6,7 +6,7 @@ Map paper claims to supporting evidence before asserting them in `main.tex`.
 
 Do not invent participant counts, quotations, statistical results, IRB status, or clinical outcomes.
 
-**Framing:** The manuscript describes the intended final Flutter product grounded in Stage~1. The current engineering prototype is secondary feasibility evidence and is explicitly identified as incomplete. Snapshot date for rows below: **2026-09-07** (companion `origin/main` audit @ `5464776`; the local checkout was on a separate dependency-update branch; re-check remote `main` before the next System Design edit).
+**Framing:** The manuscript leads with the needs assessment and then presents the planned Flutter product that responds to those findings. Engineering evidence is secondary. Snapshot date for rows below: **2026-09-07** (companion `origin/main` audit @ `5464776`; re-check remote `main` before the next System Design edit).
 
 | Claim | Kind | Evidence | Status |
 | --- | --- | --- | --- |
@@ -22,8 +22,8 @@ Do not invent participant counts, quotations, statistical results, IRB status, o
 | Final My Health design: optional PIN, encrypted on-device store, erase | Product target / demo | Product requirements; companion audit @ `5464776` confirms prototype implementation | Supported; no Stage-3 usability claim |
 | Help Now: urgent dialers (988/911/Poison) + local entries | Product | Figma + companion Help Now; demo may gate live `tel:`/`sms:` for meeting safety | Supported as product surface |
 | Map browsing of requested Nearby results OK; not continuous surveillance | Product | Privacy narrative in manuscript | Supported as product rule |
-| Empirical Stage-1 co-design / needs-assessment findings | Study | Pre-survey summary + FG theme tables | Supported (Stage 1 only) |
-| Stage-3 usability evaluation of Flutter product | Study | Not completed / not drafted | TODO |
+| Empirical co-design / needs-assessment findings | Study | Pre-survey summary + FG theme tables | Supported |
+| Usability evaluation of Flutter product | Study | Not completed | Future work only |
 
 ## Candidate contributions (provisional)
 
@@ -32,15 +32,19 @@ Do not invent participant counts, quotations, statistical results, IRB status, o
 3. Unified co-designed information architecture: Nearby, My Health, Learn, More, Help Now.
 4. Empirical evaluation: assert only after sourced study evidence.
 
-## Method / Results claims (2026-09-04)
+## Method / Results claims (updated 2026-09-07)
 
 | Claim | Kind | Evidence | Status |
 | --- | --- | --- | --- |
 | IRB Exempt 3b, Pro2025002116, approved 2025-11-19 | Ethics | Rutgers HRPP eIRB notice of approval | Supported |
-| Eight Stage-1 focus groups (2 virtual PSS, 6 in-person member groups across 3 site days) | Method | Distinct Box recording/transcript records; progress summary uses site-session shorthand | Supported |
+| Eight focus groups (2 virtual PSS, 6 in-person member groups across 3 site days) | Method | Distinct Box recording/transcript records; progress summary uses site-session shorthand | Supported |
 | Member-group sites: Glassboro, Jersey City, Plainfield | Method | Focus-group recording folders and site schedule | Supported |
 | Compensated FG attendance n=7 PSS (virtual), n=38 members (in person) | Method | Gift-card clearing sheet aggregates ($50); no names in manuscript | Supported |
 | Pre-survey member demographics n=41; smartphone items ~n=27; PSS ~n=9-10 | Results | Group comparison / pre-survey summary (July) | Supported |
 | Member/PSS qualitative themes (privacy, plain language, resource navigation, digital hesitancy, peer support) | Results | Member and PSS summary tables; July comparison narrative | Supported |
-| Themes → four-tab final Flutter target + Help Now + town-first Nearby | Design bridge | Stage-1 theme summaries, target requirements, and companion implementation evidence (re-checked 2026-09-06) | Supported as design response |
-| Stage-3 usability metrics (task completion, Help Now discoverability) | Study | Not in Stage-1 corpus | Do not claim yet |
+| Themes → four-tab Flutter target + Help Now + town-first Nearby | Design bridge | Theme summaries, 2026-08-11 design summary, target requirements, and companion evidence | Supported as design response |
+| Target users are adults who may experience poverty with mental health, substance-use, or co-occurring physical health challenges | Product / study | Final proposal research narrative | Supported |
+| Four tabs are Nearby, My Health, Learn, and More; Help Now is persistent | Product | 2026-08-11 design summary and companion shell | Supported; do not merge Learn and More into one tab |
+| Future testing will assess resource finding, personal-information tasks, Help Now, readability, trust, platform behavior, and peer training needs | Future study | Approved proposal and usability materials | Supported as planned work; do not claim results |
+| Exact future usability sample differs across planning sources (proposal n=84; later meeting plan mentions 12 remote participants) | Future study | Proposal and 2026-09-07 meeting transcript | Unresolved; omit n until protocol is confirmed |
+| Usability metrics (task completion, Help Now discoverability) | Study | Not in completed needs-assessment corpus | Do not claim yet |

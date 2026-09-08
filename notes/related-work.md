@@ -6,7 +6,7 @@ Do not paste large copyrighted excerpts here. Citation keys live in `references.
 
 Curated PDFs and reading lists for this project live with the research team outside this repository. Use published DOIs and the BibTeX entries in `references.bib` as the citable record in git.
 
-## Cited in `main.tex` (2026-09-03 draft)
+## Cited in `main.tex` (updated 2026-09-07)
 
 ### Online seeking / access
 
@@ -56,5 +56,10 @@ Added 2026-09-05 (figures + as-built Nearby detail pass):
 - `FlutterDocs2026` — Flutter framework only, not evidence for CWC Health features or prototype status
 - `NominatimDocs` — town geocode API
 - `OverpassDocs` — Roland Olbricht's maintainer-hosted Overpass API manual
+
+Added 2026-09-07 after the requested IEEE comparison search:
+
+- `Pasha2020CommunityHealth` — IEEE neural-network mobile framework for resource-poor community health; CWC Health instead centers co-designed navigation and data minimization
+- `Chiu2021SelfManagement` — IEEE interactive mobile self-management app; CWC Health differs by avoiding continuous monitoring and focusing on resource navigation and local-only user-entered records
 
 These were sourced via Crossref/DOI lookup or official docs, not the team Box literature folder.
